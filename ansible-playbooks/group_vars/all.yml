@@ -1,0 +1,17 @@
+webserver:
+  webuser: www-data
+  webgroup: www-data
+system:
+  owner: root
+  ownergroup: root
+  php_bin: /usr/bin/php
+moodle_config:
+  install:
+    prefix: /var/www
+    mode: 775
+  dataroot:
+    path: /var/moodledata
+    mode: '02770'
+db_config:
+  type: mariadb
+  table_prefix: m_

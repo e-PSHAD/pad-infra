@@ -1,0 +1,97 @@
+---
+- name: Initial Moodle deploy
+  hosts: webservers
+  tasks:
+    # Step 0 - build configuration
+    - name: Combine generic and inventory configurations
+      set_fact:
+        moodle_config: "{{ moodle_config | combine(moodle) }}"
+        db_config: "{{ db_config | combine(db) }}"
+
+    - name: Compute derived parameters for installation
+      set_fact:
+        moodle_vars:
+          host_url: "https://www.{{ moodle_config.hostname }}"
+          install_path: "{{ moodle_config.install.prefix }}/{{ moodle_config.hostname }}"
+          download_url: "https://github.com/e-PSHAD/PAD/archive/refs/tags/{{ moodle_config.version_tag }}.tar.gz"
+
+    # Step 1
+    - name: Create moodledata directory
+      ansible.builtin.file:
+        state: directory
+        path: "{{ moodle_config.dataroot.path }}"
+        mode: "{{ moodle_config.dataroot.mode }}"
+        owner: "{{ webserver.webuser }}"
+        group: "{{ webserver.webgroup }}"
+
+    # Step 2 - fetch Pad+ source for requested version
+    - name: Create moodle site directory
+      ansible.builtin.file:
+        state: directory
+        path: "{{ moodle_vars.install_path }}"
+        mode: "{{ moodle_config.install.mode }}"
+
+    - name: Check whether Moodle has already been downloaded
+      stat:
+        path: "{{ moodle_vars.install_path }}/version.php"
+      register: moodle_version
+
+    - name: Extract Pad+ release
+      ansible.builtin.unarchive:
+        src: "{{ moodle_vars.download_url }}"
+        dest: "{{ moodle_vars.install_path }}"
+        owner: "{{ webserver.webuser }}"
+        group: "{{ webserver.webgroup }}"
+        remote_src: yes
+        extra_opts: [--strip-components=1]
+      when: not moodle_version.stat.exists
+
+    # Step 3
+    - name: Customize Moodle config.php
+      ansible.builtin.template:
+        src: templates/config.php.j2
+        dest: "{{ moodle_vars.install_path }}/config.php"
+        owner: "{{ webserver.webuser }}"
+        group: "{{ webserver.webgroup }}"
+        mode: 0640
+        backup: yes
+
+    # Step 4
+    - name: Run Moodle installation
+      ansible.builtin.shell: >
+        {{ system.php_bin }}
+        admin/cli/install_database.php
+        --lang=fr
+        --fullname='{{ moodle_config.fullname }}'
+        --shortname='{{ moodle_config.shortname }}'
+        --adminuser={{ moodle_config.adminuser }}
+        --adminpass='{{ moodle_config.adminpass }}'
+        --adminemail='{{ moodle_config.adminemail }}'
+        --agree-license
+      args:
+        chdir: "{{ moodle_vars.install_path }}"
+      become: yes
+      become_user: "{{ webserver.webuser }}"
+
+    # - name: Set Moodle site owner (beware: webuser still needs read access)
+    #   ansible.builtin.file:
+    #     state: directory
+    #     path: "{{ moodle_vars.install_path }}"
+    #     owner: "{{ system.owner }}"
+    #     group: "{{ system.ownergroup }}"
+    #     recurse: true
+
+    # Step 5 - setup cron job, default periodicity is * * * * * (every minute, as recommended by Moodle - https://docs.moodle.org/311/en/Cron)
+    - name: Setup Moodle cron job
+      cron:
+        name: "Moodle Cron"
+        job: "{{ system.php_bin }} {{ moodle_vars.install_path }}/admin/cli/cron.php 2>&1"
+        user: "{{ webserver.webuser }}"
+        backup: yes
+
+    # Final step
+    - name: Post-install message
+      ansible.builtin.debug:
+        msg:
+          - Remember to backup config file at {{ moodle_vars.install_path }}/config.php
+          - Check final configuration https://docs.moodle.org/311/en/Installing_Moodle#Final_configuration
