@@ -30,8 +30,10 @@
         state: directory
         path: "{{ moodle_vars.install_path }}"
         mode: "{{ moodle_config.install.mode }}"
+        owner: "{{ system.owner }}"
+        group: "{{ webserver.webgroup }}"
 
-    - name: Check whether Moodle has already been downloaded
+    - name: Check whether PAD+ has already been downloaded
       stat:
         path: "{{ moodle_vars.install_path }}/version.php"
       register: moodle_version
@@ -40,48 +42,47 @@
       ansible.builtin.unarchive:
         src: "{{ moodle_vars.download_url }}"
         dest: "{{ moodle_vars.install_path }}"
-        owner: "{{ webserver.webuser }}"
+        owner: "{{ system.owner }}"
         group: "{{ webserver.webgroup }}"
         remote_src: yes
         extra_opts: [--strip-components=1]
       when: not moodle_version.stat.exists
 
-    # Step 3
-    - name: Customize Moodle config.php
-      ansible.builtin.template:
-        src: templates/config.php.j2
-        dest: "{{ moodle_vars.install_path }}/config.php"
-        owner: "{{ webserver.webuser }}"
-        group: "{{ webserver.webgroup }}"
-        mode: 0640
-        backup: yes
+    # Step 3 - run install script
+    - name: Check whether Moodle has already been installed
+      stat:
+        path: "{{ moodle_vars.install_path }}/config.php"
+      register: moodle_config_php
 
-    # Step 4
-    - name: Run Moodle installation
+    - name: Run Moodle installation (wait a few minutes...)
       ansible.builtin.shell: >
         {{ system.php_bin }}
-        admin/cli/install_database.php
+        admin/cli/install.php
         --lang=fr
+        --wwwroot={{ moodle_vars.host_url }}
+        --dataroot={{ moodle_config.dataroot.path }}
+        --chmod={{ moodle_config.dataroot.mode }}
+        --dbtype={{ db_config.type }}
+        --dbhost={{ db_config.host }}
+        --dbname={{ db_config.name }}
+        --dbuser={{ db_config.user }}
+        --dbpass='{{ db_config.pass }}'
+        --prefix={{ db_config.table_prefix }}
         --fullname='{{ moodle_config.fullname }}'
         --shortname='{{ moodle_config.shortname }}'
         --adminuser={{ moodle_config.adminuser }}
         --adminpass='{{ moodle_config.adminpass }}'
         --adminemail='{{ moodle_config.adminemail }}'
+        --upgradekey='{{ moodle_config.upgrade_key }}'
+        --non-interactive
         --agree-license
       args:
         chdir: "{{ moodle_vars.install_path }}"
       become: yes
       become_user: "{{ webserver.webuser }}"
+      when: not moodle_config_php.stat.exists
 
-    # - name: Set Moodle site owner (beware: webuser still needs read access)
-    #   ansible.builtin.file:
-    #     state: directory
-    #     path: "{{ moodle_vars.install_path }}"
-    #     owner: "{{ system.owner }}"
-    #     group: "{{ system.ownergroup }}"
-    #     recurse: true
-
-    # Step 5 - setup cron job, default periodicity is * * * * * (every minute, as recommended by Moodle - https://docs.moodle.org/311/en/Cron)
+    # Step 4 - setup cron job, default periodicity is * * * * * (every minute, as recommended by Moodle - https://docs.moodle.org/311/en/Cron)
     - name: Setup Moodle cron job
       cron:
         name: "Moodle Cron"
