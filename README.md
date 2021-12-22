@@ -57,6 +57,18 @@ ansible-playbook moodle_install.yml -i eig-epshad.hosts.yml -u root
 
 Le playbook définit les principales étapes d'une [installation Moodle](https://docs.moodle.org/311/en/Installing_Moodle) en s'appuyant sur le script `admin/cli/install.php`. Voir les [paramètres de configuration et de la ligne de commande](./moodle-install-parameters.md).
 
+
+## Configuration automatique post-installation
+
+La plupart des options de configuration ne deviennent disponibles qu'une fois l'installation initiale terminée (étape ci-dessus). Pour la configuration standard de la PAD+, il est possible de scripter ces options dans le [fichier pad_config_vars.yml](./ansible-playbooks/vars/pad_config_vars.yml) avec le playbook `ansible_playbooks/moosh_config_set.yml`. La procédure utilise l'outil [Moosh](https://moosh-online.com/) (installé par le paybook).
+
+```
+ansible-playbook moosh_config_set.yml -i eig-epshad.hosts.yml -u root
+```
+
+Cela permet par exemple de configurer le fuseau horaire, activer la recherche globale,... Voir une liste (non exhaustive) de [paramètres Moodle sous Moosh](./moosh-config.md).
+
+
 ## MariaDB et Debian 9
 
 | Database 	| Minimum version 	| Recommended |

@@ -1,0 +1,53 @@
+---
+- name: Moodle Config Set with Moosh
+  hosts: webservers
+  tasks:
+    # Step 0 - build configuration
+    - name: Combine generic and inventory configurations
+      set_fact:
+        moodle_config: "{{ moodle_config | combine(moodle) }}"
+        moosh_config_file: pad_config_vars.yml
+        moosh_prefix_path: /usr/local/share
+        moosh_url: https://moodle.org/plugins/download.php/25295/moosh_moodle311_2021101200.zip
+
+    - name: Compute derived parameters for installation
+      set_fact:
+        moodle_path: "{{ moodle_config.install.prefix }}/{{ moodle_config.hostname }}"
+        moosh_path: "{{ moosh_prefix_path }}/moosh/moosh.php"
+
+    # Step 1 - Moosh installation
+    - name: Check whether Moosh has already been downloaded
+      stat:
+        path: "{{ moosh_path }}"
+      register: moosh_file
+
+    - name: Install unzip package
+      ansible.builtin.apt:
+        name: unzip
+
+    - name: Extract Moosh archive
+      ansible.builtin.unarchive:
+        src: "{{ moosh_url }}"
+        dest: "{{ moosh_prefix_path }}"
+        remote_src: yes
+      when: not moosh_file.stat.exists
+
+    - name: Create link to Moosh script
+      ansible.builtin.file:
+        state: link
+        path: /usr/local/bin/moosh
+        src: "{{ moosh_path }}"
+      when: not moosh_file.stat.exists
+
+    # Step 2 - Moosh config set
+    - name: Load config var from file
+      include_vars:
+        file: "{{ moosh_config_file }}"
+
+    - name: Set config with Moosh
+      ansible.builtin.shell: >
+        sudo -u {{ webserver.webuser }}
+        moosh config-set {{ item.key }} {{ item.value }} {{ item.plugin | default('core') }}
+      args:
+        chdir: "{{ moodle_path }}"
+      loop: "{{ config }}"

@@ -1,0 +1,8 @@
+config:
+  # -
+  #   key: parameter key
+  #   value: parameter value
+  #   plugin: plugin for non-core parameter (optional)
+  -
+    key: timezone
+    value: Europe/Paris
