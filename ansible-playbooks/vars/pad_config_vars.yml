@@ -6,3 +6,12 @@ config:
   -
     key: timezone
     value: Europe/Paris
+  -
+    key: theme
+    value: padplus
+  - # set default language fr (french language pack still has to be manually installed)
+    key: lang
+    value: fr
+  - # hide language menu in navigation bar
+    key: langmenu
+    value: 0
