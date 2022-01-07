@@ -15,3 +15,6 @@ config:
   - # hide language menu in navigation bar
     key: langmenu
     value: 0
+  - # enable global search in top bar
+    key: enableglobalsearch
+    value: 1
