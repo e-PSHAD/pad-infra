@@ -18,3 +18,28 @@ config:
   - # enable global search in top bar
     key: enableglobalsearch
     value: 1
+  - # display no element on frontpage for authenticated users
+    key: frontpageloggedin
+    value: ''
+  - # display no element on frontpage for anonymous users
+    key: frontpage
+    value: ''
+  - # hide guest button on login page (anonymous login)
+    key: guestloginbutton
+    value: 0
+  - # customize atto toolbar to provide font and back color pickers
+    key: toolbar
+    value: |
+      collapse = collapse
+      style1 = title, bold, italic
+      list = unorderedlist, orderedlist, indent
+      colors = fontcolor, backcolor
+      links = link
+      files = emojipicker, image, media, recordrtc, managefiles, h5p
+      style2 = underline, strike, subscript, superscript
+      align = align
+      insert = equation, charmap, table, clear
+      undo = undo
+      accessibility = accessibilitychecker, accessibilityhelper
+      other = html
+    plugin: editor_atto

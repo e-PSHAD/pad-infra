@@ -47,7 +47,7 @@
     - name: Set config with Moosh
       ansible.builtin.shell: >
         sudo -u {{ webserver.webuser }}
-        moosh config-set {{ item.key }} {{ item.value }} {{ item.plugin | default('core') }}
+        moosh config-set {{ item.key }} "{{ item.value }}" {{ item.plugin | default('core') }}
       args:
         chdir: "{{ moodle_path }}"
       loop: "{{ config }}"
