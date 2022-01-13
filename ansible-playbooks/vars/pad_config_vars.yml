@@ -43,3 +43,13 @@ config:
       accessibility = accessibilitychecker, accessibilityhelper
       other = html
     plugin: editor_atto
+capabilities:
+  # -
+  #   role: role short name (see moosh role-list)
+  #   capability: capability key
+  #   value: inherit|allow|prevent|prohibit
+  #   contexid: (optional, default 1 = system-wide)
+- # prevent all users to modify their dashboard (except admin)
+  role: user
+  capability: moodle/my:manageblocks
+  value: inherit

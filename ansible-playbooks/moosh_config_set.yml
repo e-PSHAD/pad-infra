@@ -51,3 +51,11 @@
       args:
         chdir: "{{ moodle_path }}"
       loop: "{{ config }}"
+
+    - name: Set capabilities with Moosh
+      ansible.builtin.shell: >
+        sudo -u {{ webserver.webuser }}
+        moosh role-update-capability {{ item.role }} {{ item.capability }} {{ item.value }} {{ item.contextid | default(1) }}
+      args:
+        chdir: "{{ moodle_path }}"
+      loop: "{{ capabilities }}"
