@@ -60,7 +60,7 @@ Le playbook définit les principales étapes d'une [installation Moodle](https:/
 
 ## Configuration automatique post-installation
 
-La plupart des options de configuration ne deviennent disponibles qu'une fois l'installation initiale terminée (étape ci-dessus). Pour la configuration standard de la PAD+, il est possible de scripter ces options dans le [fichier pad_config_vars.yml](./ansible-playbooks/vars/pad_config_vars.yml) avec le playbook `ansible_playbooks/moosh_config_set.yml`. La procédure utilise l'outil [Moosh](https://moosh-online.com/) (installé par le paybook).
+La plupart des options de configuration ne deviennent disponibles qu'une fois l'installation initiale terminée (étape ci-dessus). Pour la configuration standard de la PAD+, il est possible de scripter ces options dans le [fichier pad_config_vars.yml](./ansible-playbooks/vars/pad_config_vars.yml) avec le playbook `ansible_playbooks/moosh_config_set.yml`. La procédure utilise l'outil [Moosh](https://moosh-online.com/) (installé par le playbook). Le playbook prend aussi en charge la redéfinition des permissions des rôles.
 
 ```
 ansible-playbook moosh_config_set.yml -i eig-epshad.hosts.yml -u root
@@ -68,6 +68,7 @@ ansible-playbook moosh_config_set.yml -i eig-epshad.hosts.yml -u root
 
 Cela permet par exemple de configurer le fuseau horaire, activer la recherche globale,... Voir une liste (non exhaustive) de [paramètres Moodle sous Moosh](./moosh-config.md).
 
+Dans le fichier `pad_config_vars.yml`, la seconde section `capabilities` permet de changer les permissions de la plateforme par rôle. Par exemple, désactiver l'édition du tableau de bord pour tous les utilisateurs.
 
 ## MariaDB et Debian 9
 
