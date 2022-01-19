@@ -57,6 +57,20 @@ config:
     value: ''
     plugin: tool_mobile
 
+  # Dashboard
+  - # disable 'all courses' filter on dashboard overview block
+    key: displaygroupingall
+    value: 0
+    plugin: block_myoverview
+  - # disable 'hidden courses' filter on dashboard overview block
+    key: displaygroupinghidden
+    value: 0
+    plugin: block_myoverview
+  - # remove 'summary' from layouts in dashboard overview block
+    key: layouts
+    value: card,list
+    plugin: block_myoverview
+
 capabilities:
   # -
   #   role: role short name (see moosh role-list)
