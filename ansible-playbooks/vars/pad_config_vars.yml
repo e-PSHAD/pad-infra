@@ -27,6 +27,10 @@ config:
   - # hide guest button on login page (anonymous login)
     key: guestloginbutton
     value: 0
+  - # hide 'data retention summary' link in footer and profile
+    key: showdataretentionsummary
+    value: 0
+    plugin: tool_dataprivacy
   - # customize atto toolbar to provide font and back color pickers
     key: toolbar
     value: |
@@ -43,6 +47,16 @@ config:
       accessibility = accessibilitychecker, accessibilityhelper
       other = html
     plugin: editor_atto
+
+  # Mobile service
+  -
+    key: enablemobilewebservice
+    value: 1
+  - # hide 'get mobile app' link in footer
+    key: setuplink
+    value: ''
+    plugin: tool_mobile
+
 capabilities:
   # -
   #   role: role short name (see moosh role-list)
