@@ -19,20 +19,10 @@
  * Local language pack from http://localhost:8000
  *
  * @package    core
- * @subpackage calendar
+ * @subpackage access
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
-$string['calendar'] = 'Mon calendrier';
-$string['course'] = 'Séquence';
-$string['courseevent'] = 'Événement de séquence';
-$string['courseevents'] = 'Événements de séquence';
-$string['courses'] = 'Séquences';
-$string['errorbeforecoursestart'] = 'Impossible de fixer un événement avant le début de la séquence';
-$string['eventsrelatedtocourses'] = 'Événement en liens avec les séquences';
-$string['eventtypecourse'] = 'séquence';
-$string['hideeventtype'] = 'Masquer les événements {$a}';
-$string['showeventtype'] = 'Afficher les événements {$a}';
-$string['typecourse'] = 'Événement de séquence';
+$string['breadcrumb'] = 'Fil d\'Ariane';
