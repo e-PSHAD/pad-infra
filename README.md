@@ -94,3 +94,7 @@ Install latest version
 sudo apt-get update
 sudo apt-get install mariadb-server
 ```
+
+## Paquetage de langue personnalisé pour la PAD+
+
+Ce dépôt contient dans le [dossier lang](lang/) l'archive de paquetage et l'historique des chaînes personnalisées dans la PAD+.
