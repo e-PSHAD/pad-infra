@@ -1,0 +1,68 @@
+---
+- name: Moodle Config Set with Moosh for Local Docker Container
+  hosts: webservers
+  connection: local
+  tasks:
+    - name: Set custom facts
+      set_fact:
+        moodle_path: /var/www/html # from docker compose project
+        dataroot_path: /var/www/moodledata # from config-docker.php
+        french_pack_url: https://download.moodle.org/langpack/3.11/fr.zip
+        custom_pack_url: https://github.com/e-PSHAD/pad-infra/raw/main/lang/customlang_fr.zip
+        moosh_config_file: pad_config_vars.yml
+
+    # Language pack installation
+    - name: Install french language pack
+      community.docker.docker_container_exec:
+        container: "{{ docker.webserver_name }}"
+        command: >
+          /bin/bash -c
+          "curl -L -o fr.zip {{ french_pack_url }} && unzip -o -d lang fr.zip && rm fr.zip"
+        chdir: "{{ dataroot_path }}"
+
+    - name: Install customized strings for language pack
+      community.docker.docker_container_exec:
+        container: "{{ docker.webserver_name }}"
+        command: >
+          /bin/bash -c
+          "curl -L -o customlang_fr.zip {{ custom_pack_url }} && unzip -o -d lang/fr_local customlang_fr.zip && rm customlang_fr.zip"
+        chdir: "{{ dataroot_path }}"
+
+    - name: Set access rights on newly installed language packs
+      community.docker.docker_container_exec:
+        container: "{{ docker.webserver_name }}"
+        command: /bin/bash -c "chown -R www-data:www-data lang"
+        chdir: "{{ dataroot_path }}"
+
+    - name: Purge language string cache
+      community.docker.docker_container_exec:
+        container: "{{ docker.webserver_name }}"
+        command: /bin/bash -c "php admin/cli/purge_caches.php --lang"
+        chdir: "{{ moodle_path }}"
+
+    # Moosh config set
+    - name: Load config var from file
+      include_vars:
+        file: "{{ moosh_config_file }}"
+
+    - name: Set config with Moosh
+      community.docker.docker_container_exec:
+        container: "{{ docker.webserver_name }}"
+        command: >
+          /bin/bash -c
+          "moosh -n config-set {{ item.key }} "{{ item.value }}" {{ item.plugin | default('core') }}"
+        chdir: "{{ moodle_path }}"
+      loop: "{{ config }}"
+      register: result
+    - debug: var=result.msg
+
+    - name: Set capabilities with Moosh
+      community.docker.docker_container_exec:
+        container: "{{ docker.webserver_name }}"
+        command: >
+          /bin/bash -c
+          "moosh -n role-update-capability {{ item.role }} {{ item.capability }} {{ item.value }} {{ item.contextid | default(1) }}"
+        chdir: "{{ moodle_path }}"
+      loop: "{{ capabilities }}"
+      register: result
+    - debug: var=result.msg

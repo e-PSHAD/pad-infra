@@ -70,6 +70,39 @@ Cela permet par exemple de configurer le fuseau horaire, activer la recherche gl
 
 Dans le fichier `pad_config_vars.yml`, la seconde section `capabilities` permet de changer les permissions de la plateforme par rôle. Par exemple, désactiver l'édition du tableau de bord pour tous les utilisateurs.
 
+### Configuration automatique d'une installation locale sous Docker
+
+Le playbook `ansible_playbooks/docker_post_config.yml` permet d'effectuer la même série de configuration automatique pour une [installation locale sous Docker](https://e-pshad.github.io/pad-doc/developpement/setup-local). Moosh est installé par défaut dans [l'image Docker de développement](https://github.com/e-PSHAD/PAD/blob/pad-main/dev_assets/docker/Dockerfile.pad_dev). Le playbook installe aussi les paquetages de langue.
+
+Pour être exécuté, ce playbook nécessite l'installation de deux dépendances :
+
+```shell
+# bindings pour Docker sous Python 3.8
+pip install docker
+# module Ansible pour Docker
+ansible-galaxy collection install community.docker
+```
+
+Un fichier d'inventaire spécifique doit être créé pour cibler le conteneur Docker :
+
+```yaml
+all:
+  children:
+    webservers:
+      hosts:
+        docker-webserver:
+          ansible_host: 127.0.0.1
+      vars:
+        docker:
+          webserver_name: padplus-webserver-1 # nom du conteneur dans votre projet docker-compose local
+```
+
+Exécuter le playbook `docker_post_config.yml` dans le répertoire `ansible_playbooks`. Exemple avec un fichier d'inventaire `local-docker.hosts.yml` :
+
+```
+ansible-playbook docker_post_config.yml -i local-docker.hosts.yml
+```
+
 ## MariaDB et Debian 9
 
 | Database 	| Minimum version 	| Recommended |
