@@ -8,7 +8,8 @@
         moodle_config: "{{ moodle_config | combine(moodle) }}"
         moosh_config_file: pad_config_vars.yml
         moosh_prefix_path: /usr/local/share
-        moosh_url: https://moodle.org/plugins/download.php/25295/moosh_moodle311_2021101200.zip
+        moosh_url: https://moodle.org/plugins/download.php/25565/moosh_moodle311_2021113000.zip
+        moosh_version: '1.4'
 
     - name: Compute derived parameters for installation
       set_fact:
@@ -21,6 +22,11 @@
         path: "{{ moosh_path }}"
       register: moosh_file
 
+    - name: Retrieve Moosh current version
+      ansible.builtin.shell: moosh -v | grep 'moosh version' | cut -d' ' -f 3
+      register: moosh_current_version
+      when: moosh_file.stat.exists
+
     - name: Install unzip package
       ansible.builtin.apt:
         name: unzip
@@ -30,7 +36,7 @@
         src: "{{ moosh_url }}"
         dest: "{{ moosh_prefix_path }}"
         remote_src: yes
-      when: not moosh_file.stat.exists
+      when: moosh_current_version is not defined or moosh_current_version.stdout != moosh_version
 
     - name: Create link to Moosh script
       ansible.builtin.file:
