@@ -58,6 +58,7 @@
         chdir: "{{ moodle_path }}"
       loop: "{{ config }}"
 
+    # Step 3 - Moosh capabilities set
     - name: Set capabilities with Moosh
       ansible.builtin.shell: >
         sudo -u {{ webserver.webuser }}
@@ -65,3 +66,39 @@
       args:
         chdir: "{{ moodle_path }}"
       loop: "{{ capabilities }}"
+
+    - name: Update Student context level to category
+      ansible.builtin.shell: >
+        sudo -u {{ webserver.webuser }}
+        moosh -n role-update-contextlevel --category-on student
+      args:
+        chdir: "{{ moodle_path }}"
+
+    # Step 3bis - editingteacher self-assign role
+    - name: Set editingteacher self-assign role
+      block:
+      - name: Retrieve editingteacher id
+        ansible.builtin.shell: >
+          sudo -u {{ webserver.webuser }}
+          moosh -n sql-run "SELECT ID FROM {{ db_config.table_prefix }}role WHERE shortname = 'editingteacher'" | awk '/id/ {print $NF}'
+        args:
+          chdir: "{{ moodle_path }}"
+        register: result
+      - set_fact: editingteacher_id="{{ result.stdout }}"
+
+      - name: Retrieve status for editingteacher self-assign role
+        ansible.builtin.shell: >
+          sudo -u {{ webserver.webuser }}
+          moosh -n sql-run "SELECT ID FROM {{ db_config.table_prefix }}role_allow_assign WHERE roleid = {{ editingteacher_id }} AND allowassign = {{ editingteacher_id }}"
+        args:
+          chdir: "{{ moodle_path }}"
+        register: result
+      - set_fact: editingteacher_self_assign_isset="{{ result.stdout }}"
+
+      - name: Set editingteacher role assign if needed
+        ansible.builtin.shell: >
+          sudo -u {{ webserver.webuser }}
+          moosh -n sql-run "INSERT INTO {{ db_config.table_prefix }}role_allow_assign (roleid, allowassign) VALUES ({{ editingteacher_id }}, {{ editingteacher_id }})"
+        args:
+          chdir: "{{ moodle_path }}"
+        when: editingteacher_self_assign_isset == ''

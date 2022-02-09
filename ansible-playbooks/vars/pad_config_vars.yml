@@ -77,7 +77,39 @@ capabilities:
   #   capability: capability key
   #   value: inherit|allow|prevent|prohibit
   #   contexid: (optional, default 1 = system-wide)
-- # prevent all users to modify their dashboard (except admin)
+- # prevent authenticated users to modify their dashboard (except admin)
   role: user
   capability: moodle/my:manageblocks
   value: inherit
+- # prevent anonymous users to browse course tree
+  role: guest
+  capability: moodle/category:viewcourselist
+  value: inherit
+- # prevent authenticated users to browse course tree
+  role: user
+  capability: moodle/category:viewcourselist
+  value: inherit
+- # reenable course browsing for manager
+  role: manager
+  capability: moodle/category:viewcourselist
+  value: allow
+- # reenable course browsing for course creator
+  role: coursecreator
+  capability: moodle/category:viewcourselist
+  value: allow
+- # reenable course browsing for student
+  role: student
+  capability: moodle/category:viewcourselist
+  value: allow
+- # enable course view for course creator (without the need to enrol)
+  role: coursecreator
+  capability: moodle/course:view
+  value: allow
+- # enable course backup for course creator (enable course copy)
+  role: coursecreator
+  capability: moodle/backup:backupcourse
+  value: allow
+- # enable course restore for course creator (enable course copy)
+  role: coursecreator
+  capability: moodle/restore:restorecourse
+  value: allow
