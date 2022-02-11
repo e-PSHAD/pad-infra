@@ -95,6 +95,25 @@ all:
       vars:
         docker:
           webserver_name: padplus-webserver-1 # nom du conteneur dans votre projet docker-compose local
+        import_data: # variables pour l'import automatique de données
+          source_folder: ./demo # non utilisé dans le playbook docker
+          users_file: demo/users.csv
+          users_categories_file: demo/users_categories.csv
+          category_files:
+            - demo/categories_bordeaux.xml
+            - demo/categories_limoges.xml
+            - demo/categories_muret.xml
+            - demo/categories_catalogue.xml
+          course_files:
+            - demo/sequences_bordeaux.csv
+            - demo/sequences_limoges.csv
+            - demo/sequences_muret.csv
+            - demo/sequences_catalogue.csv
+          remove_categories: # match category to remove by name/substring
+            - Bordeaux
+            - Limoges
+            - Muret
+            - Catalogue
 ```
 
 Exécuter le playbook `docker_post_config.yml` dans le répertoire `ansible_playbooks`. Exemple avec un fichier d'inventaire `local-docker.hosts.yml` :
@@ -102,6 +121,27 @@ Exécuter le playbook `docker_post_config.yml` dans le répertoire `ansible_play
 ```
 ansible-playbook docker_post_config.yml -i local-docker.hosts.yml
 ```
+
+### Import automatique de données sous Docker
+
+Le playbook `ansible_playbooks/docker_import_data.yml` permet d'importer plusieurs types de données depuis des fichiers sources et des sauvegardes :
+
+- création de comptes à partir d'un fichier CSV - voir https://docs.moodle.org/311/en/Upload_users
+- import d'arborescences de catégories à partir de plusieurs fichiers XML (commande `moosh category-export`)
+- import de backups de séquences dans l'arborescence - voir https://docs.moodle.org/311/en/Upload_courses
+- inscription des usagers dans les séquences
+- attribution des rôles des usagers dans les catégories
+
+Le fichier d'inventaire doit contenir une section `import_data` dans les vars pour référencer les fichiers sources (voir exemple ci-dessus). Attention ces fichiers doivent être accessibles sous Docker. Exécuter le playbook `docker_import_data.yml` dans le répertoire `ansible_playbooks`. Des tags Ansible permettent de n'exécuter que certaines tâches : `users`, `categories`, `courses`, `users_categories`. Exemple avec un fichier d'inventaire `local-docker.hosts.yml` :
+
+```
+ansible-playbook docker_import_data.yml -i local-docker.hosts.yml [--tags users]
+```
+
+La tâche "Remove matched categories and content" est **destructrice** : elle supprime toutes les catégories trouvées par `import_data.remove_categories` ainsi que les sous-catégories et séquences associées. Cette tâche n'est exécutée qu'en l'appelant explicitement avec le tag `remove-category-and-content`.
+
+La tâche "Remove all existing users except guest, admin" est **destructrice** : elle supprime tous les comptes utilisateurs à l'exception du compte invité et du compte admin de base. Cette tâche n'est exécutée qu'en l'appelant explicitement avec le tag `remove-all-users`.
+
 
 ## MariaDB et Debian 9
 

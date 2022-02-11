@@ -11,7 +11,7 @@
         moosh_url: https://moodle.org/plugins/download.php/25565/moosh_moodle311_2021113000.zip
         moosh_version: '1.4'
 
-    - name: Compute derived parameters for installation
+    - name: Compute derived parameters
       set_fact:
         moodle_path: "{{ moodle_config.install.prefix }}/{{ moodle_config.hostname }}"
         moosh_path: "{{ moosh_prefix_path }}/moosh/moosh.php"
@@ -23,7 +23,7 @@
       register: moosh_file
 
     - name: Retrieve Moosh current version
-      ansible.builtin.shell: moosh -v | grep 'moosh version' | cut -d' ' -f 3
+      ansible.builtin.shell: moosh -v | awk '/moosh version/ {print $NF}'
       register: moosh_current_version
       when: moosh_file.stat.exists
 

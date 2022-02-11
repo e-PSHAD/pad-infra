@@ -1,0 +1,134 @@
+---
+- name: Import data into Docker Container
+  hosts: webservers
+  connection: local
+  tasks:
+    - set_fact:
+        moodle_path: /var/www/html # from docker compose project
+      tags: always
+
+    - name: Create categories
+      community.docker.docker_container_exec:
+        container: "{{ docker.webserver_name }}"
+        command: >
+          /bin/bash -c
+          "moosh -n category-import {{ item }}"
+        chdir: "{{ moodle_path }}"
+      loop: "{{ import_data.category_files }}"
+      register: result
+      tags: categories
+    - debug: var=result.msg
+      tags: categories
+
+    # On-demand Task
+    - name: Remove default category (Miscellaneous)
+      community.docker.docker_container_exec:
+        container: "{{ docker.webserver_name }}"
+        command: >
+          /bin/bash -c
+          "moosh -n category-delete 1"
+        chdir: "{{ moodle_path }}"
+      tags: [never, remove-misc-category]
+
+    - name: Import courses
+      community.docker.docker_container_exec:
+        container: "{{ docker.webserver_name }}"
+        command: >
+          /bin/bash -c
+          "php admin/tool/uploadcourse/cli/uploadcourse.php --mode=createnew --file=`pwd`/{{ item }}"
+        chdir: "{{ moodle_path }}"
+      loop: "{{ import_data.course_files }}"
+      register: result
+      tags: courses
+    - debug:
+        msg: "{{ result.results | map(attribute='stdout_lines') }}"
+      tags: courses
+
+    # uploadcourse script does not restore the activity type for single activity courses,
+    # so we force the type to 'page' since we want that for our demo data.
+    - name: Fix activity type to 'page' for all single activity courses
+      community.docker.docker_container_exec:
+        container: "{{ docker.webserver_name }}"
+        command: >
+          /bin/bash -c
+          "moosh -n sql-run \"UPDATE {{ db_config.table_prefix }}course_format_options SET value = 'page' WHERE format = 'singleactivity'\""
+        chdir: "{{ moodle_path }}"
+      tags: courses
+
+    - name: Create user accounts and course enrolments
+      community.docker.docker_container_exec:
+        container: "{{ docker.webserver_name }}"
+        command: >
+          /bin/bash -c
+          "php admin/tool/uploaduser/cli/uploaduser.php --file=`pwd`/{{ import_data.users_file }} --delimiter_name=comma"
+        chdir: "{{ moodle_path }}"
+      register: result
+      tags: users
+    - debug: var=result.stdout_lines
+      tags: users
+
+    - name: Assign category roles to users
+      community.docker.docker_container_exec:
+        container: "{{ docker.webserver_name }}"
+        command: >
+          /bin/bash -c
+          "php theme/padplus/cli/assign_category_roles.php `pwd`/{{ import_data.users_categories_file }}"
+        chdir: "{{ moodle_path }}"
+      register: result
+      tags: users_categories
+    - debug: var=result.stdout_lines
+      tags: users_categories
+
+    # On-demand Task
+    - name: Remove matched categories and content
+      tags: [never, remove-category-and-content]
+      block:
+      - name: List categories ids
+        community.docker.docker_container_exec:
+          container: "{{ docker.webserver_name }}"
+          command: >
+            /bin/bash -c
+            "moosh -n category-list {{ item }} | awk '/^[0-9]/ {print $1}'"
+          chdir: "{{ moodle_path }}"
+        loop: "{{ import_data.remove_categories }}"
+        register: result
+      - set_fact:
+          category_ids: "{{ result.results | map(attribute='stdout_lines') | flatten }}"
+      - debug: var=category_ids
+
+      - name: Remove categories by id
+        community.docker.docker_container_exec:
+          container: "{{ docker.webserver_name }}"
+          command: >
+            /bin/bash -c
+            "moosh -n category-delete {{ item }}"
+          chdir: "{{ moodle_path }}"
+        loop: "{{ category_ids }}"
+        register: result
+      - debug:
+          msg: "{{ result.results | map(attribute='stdout_lines') }}"
+
+    # On-demand Task
+    - name: Remove all existing users except guest, admin
+      tags: [never, remove-all-users]
+      block:
+      - name: List existing usernames with id > 2 (exclude guest and admin ids)
+        community.docker.docker_container_exec:
+          container: "{{ docker.webserver_name }}"
+          command: >
+            /bin/bash -c
+            "moosh -n user-list 'id > 2 AND deleted = 0' | awk '{print $1}'"
+          chdir: "{{ moodle_path }}"
+        register: result
+      - set_fact:
+          usernames: "{{ result.stdout_lines | join(' ') }}"
+      - debug: var=usernames
+
+      - name: Remove all existing users except guest/admin
+        community.docker.docker_container_exec:
+          container: "{{ docker.webserver_name }}"
+          command: >
+            /bin/bash -c
+            "moosh -n user-delete {{ usernames }}"
+          chdir: "{{ moodle_path }}"
+        when: usernames | length > 0

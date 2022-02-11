@@ -1,0 +1,105 @@
+---
+- name: Import data
+  hosts: webservers
+  tasks:
+    # Step 0 - build configuration
+    - name: Combine generic and inventory configurations
+      set_fact:
+        moodle_config: "{{ moodle_config | combine(moodle) }}"
+        db_config: "{{ db_config | combine(db) }}"
+      tags: always
+
+    - name: Compute derived parameters
+      set_fact:
+        moodle_path: "{{ moodle_config.install.prefix }}/{{ moodle_config.hostname }}"
+        target_folder: "{{ import_data.source_folder | basename }}"
+      tags: always
+
+    # Step 1 - Transfer data
+    # Copy source_folder into moodle_path/target_folder = (source_folder | basename)
+    - name: Transfer data folder
+      ansible.builtin.copy:
+        src: "{{ import_data.source_folder }}"
+        dest: "{{ moodle_path }}"
+        owner: "{{ system.owner }}"
+        group: "{{ webserver.webgroup }}"
+        mode: '0640'
+      tags: [always, transfer-data]
+
+    # Step 2 - Create categories
+    - name: Create categories
+      ansible.builtin.shell: >
+        sudo -u {{ webserver.webuser }}
+        moosh category-import {{ item }}
+      args:
+        chdir: "{{ moodle_path }}"
+      loop: "{{ import_data.category_files }}"
+      register: result
+      tags: categories
+    - debug: var=result.msg
+      tags: categories
+
+    # On-demand Task - Remove default category
+    - name: Remove default category (Miscellaneous)
+      ansible.builtin.shell: >
+        sudo -u {{ webserver.webuser }}
+        moosh category-delete 1
+      args:
+        chdir: "{{ moodle_path }}"
+      tags: [never, remove-misc-category]
+
+    # Step 3 - Import courses
+    - name: Import courses
+      ansible.builtin.shell: >
+        sudo -u {{ webserver.webuser }}
+        php admin/tool/uploadcourse/cli/uploadcourse.php --mode=createnew --file=`pwd`/{{ item }}
+      args:
+        chdir: "{{ moodle_path }}"
+      loop: "{{ import_data.course_files }}"
+      register: result
+      tags: courses
+    - debug:
+        msg: "{{ result.results | map(attribute='stdout_lines') }}"
+      tags: courses
+
+    # On-demand Task
+    # uploadcourse script does not restore the activity type for single activity courses,
+    # so we force the type to 'page' since we want that for our demo data.
+    - name: Fix activity type to 'page' for all single activity courses
+      ansible.builtin.shell: >
+        sudo -u {{ webserver.webuser }}
+        moosh sql-run "UPDATE {{ db_config.table_prefix }}course_format_options SET value = 'page' WHERE format = 'singleactivity'"
+      args:
+        chdir: "{{ moodle_path }}"
+      tags: [never, fix-single-activity-page]
+
+    # Step 4 - Create user accounts and course enrolments
+    - name: Create user accounts and course enrolments
+      ansible.builtin.shell: >
+        sudo -u {{ webserver.webuser }}
+        php admin/tool/uploaduser/cli/uploaduser.php --file=`pwd`/{{ import_data.users_file }} --delimiter_name=comma
+      args:
+        chdir: "{{ moodle_path }}"
+      register: result
+      tags: users
+    - debug: var=result.stdout_lines
+      tags: users
+
+    # Step 5 - Assign category roles to users
+    - name: Assign category roles to users
+      ansible.builtin.shell: >
+        sudo -u {{ webserver.webuser }}
+        php theme/padplus/cli/assign_category_roles.php `pwd`/{{ import_data.users_categories_file }}
+      args:
+        chdir: "{{ moodle_path }}"
+      register: result
+      tags: users_categories
+    - debug: var=result.stdout_lines
+      tags: users_categories
+
+    # Step 6 - Clean up
+    - name: Clean up data folder on server
+      ansible.builtin.file:
+        state: absent
+        path: "{{ moodle_path }}/{{ target_folder }}"
+      tags: [always, cleanup]
