@@ -25,10 +25,10 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$string['archetypecoursecreator'] = 'MODÈLE : Créateur de séquence';
-$string['archetypeeditingteacher'] = 'MODÈLE : Formateur';
+$string['archetypecoursecreator'] = 'MODÈLE : Contributeur';
+$string['archetypeeditingteacher'] = 'MODÈLE : Intervenant';
 $string['archetypestudent'] = 'MODÈLE : Stagiaire';
-$string['archetypeteacher'] = 'MODÈLE : Formateur non éditeur';
+$string['archetypeteacher'] = 'MODÈLE : Intervenant non éditeur';
 $string['assignroles_help'] = 'En attribuant un rôle à un utilisateur dans un certain contexte, vous lui accordez les permissions correspondant à ce rôle, pour le contexte en question et tous les contextes inférieurs. Par exemple, si dans une séquence vous attribuez un rôle de stagiaire à un utilisateur, cet utilisateur aura ce rôle dans la séquence, mais également dans les blocs et activités de cette séquence.';
 $string['backup:backupcourse'] = 'Sauvegarder des séquences';
 $string['backup:backupsection'] = 'Sauvegarder des séances';
@@ -68,10 +68,10 @@ $string['course:visibility'] = 'Cacher/afficher les séquences';
 $string['deletecourseoverrides'] = 'Supprimer toutes les dérogations de la séquence';
 $string['frontpageuserdescription'] = 'Tous les utilisateurs connectés sur la séquence page d\'accueil.';
 $string['globalroleswarning'] = 'ATTENTION ! Les rôles que vous attribuez sur cette page s\'appliqueront aux utilisateurs concernés pour l\'intégralité du système, y compris pour la page d\'accueil et pour toutes les séquences.';
-$string['legacy:coursecreator'] = 'RÔLE HISTORIQUE : Créateur de séquence';
-$string['legacy:editingteacher'] = 'RÔLE HISTORIQUE : Formateur (éditeur)';
+$string['legacy:coursecreator'] = 'RÔLE HISTORIQUE : Contributeur';
+$string['legacy:editingteacher'] = 'RÔLE HISTORIQUE : Intervenant (éditeur)';
 $string['legacy:student'] = 'RÔLE HISTORIQUE : Stagiaire';
-$string['legacy:teacher'] = 'RÔLE HISTORIQUE : Formateur (non éditeur)';
+$string['legacy:teacher'] = 'RÔLE HISTORIQUE : Intervenant (non éditeur)';
 $string['managerdescription'] = 'Les gestionnaires peuvent accéder aux séquences et les modifier, mais en général, ils n\'y participent pas.';
 $string['restore:restorecourse'] = 'Restaurer des séquences';
 $string['restore:restoresection'] = 'Restaurer des séances';

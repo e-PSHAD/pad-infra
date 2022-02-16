@@ -28,5 +28,5 @@ defined('MOODLE_INTERNAL') || die();
 $string['config_importrecordings_enabled_description'] = 'Quand ce paramètre et l\'option enregistrement sont autorisés, il est possible d\'importer des enregistrements de différentes séquences dans une activité.';
 $string['email_footer_sent_from'] = 'de la séquence';
 $string['mod_form_field_wait'] = 'Les stagiaires doivent attendre qu\'un modérateur soit présent';
-$string['view_error_no_group_student'] = 'Vous n\'avez pas été inscrit dans un groupe. Veuillez contacter votre formateur, ou l\'administrateur.';
+$string['view_error_no_group_student'] = 'Vous n\'avez pas été inscrit dans un groupe. Veuillez contacter votre intervenant, ou l\'administrateur.';
 $string['view_error_unable_join_student'] = 'Impossible de se connecter au serveur BigBlueButton (module de classe virtuelle). Veuillez contacter votre froamteur ou l\'administrateur.';

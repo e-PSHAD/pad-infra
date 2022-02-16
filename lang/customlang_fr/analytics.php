@@ -25,7 +25,7 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$string['errornoroles'] = 'Le rôle de stagiaire ou de formateur n\'a pas été défini. Veuillez les définir dans la page de configuration de l\'analyse de données.';
+$string['errornoroles'] = 'Le rôle de stagiaire ou de intervenant n\'a pas été défini. Veuillez les définir dans la page de configuration de l\'analyse de données.';
 $string['nocourses'] = 'Aucune séquence à analyser';
 $string['percentonline_help'] = 'Si votre organisation propose des séquences hybrides, quel pourcentage de travail est effectué en ligne par les stagiaires ? Indiquez un nombre entre 0 et 100.';
 $string['timesplittingmethod_help'] = 'L\'intervalle d\'analyse définit quand le système calcule les prédictions, ainsi que la partie des journaux d\'activité considérée pour ces prédictions. Par exemple, la durée de la séquence peut être divisée en périodes, et une prédiction générée à la fin de chaque période.';

@@ -25,4 +25,4 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$string['modulename_help'] = 'Le module consultation fournit un certain nombre d\'instruments qui se sont avérés utiles et stimulants pour les environnements d\'apprentissage en ligne. Les formateurs peuvent les employer pour recueillir des données qui les informeront sur leurs stagiaires et ainsi réfléchir sur leur propre enseignement. Les questions proposées dans ces outils sont prédéfinies et ne peuvent pas être modifiées. Les formateurs désireux de créer leurs propres questions utiliseront plutôt le module d\'activité feedback.';
+$string['modulename_help'] = 'Le module consultation fournit un certain nombre d\'instruments qui se sont avérés utiles et stimulants pour les environnements d\'apprentissage en ligne. Les intervenants peuvent les employer pour recueillir des données qui les informeront sur leurs stagiaires et ainsi réfléchir sur leur propre enseignement. Les questions proposées dans ces outils sont prédéfinies et ne peuvent pas être modifiées. Les intervenants désireux de créer leurs propres questions utiliseront plutôt le module d\'activité feedback.';

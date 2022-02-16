@@ -25,7 +25,7 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$string['activitychoosertabmode_desc'] = 'Le sélecteur d\'activité permet au formateur de choisir facilement les activités et ressources à ajouter à leur séquence. Ce réglage détermine les onglets à y afficher. L\'onglet « Favoris » n\'est affiché que si l\'utilisateur a marqué une ou plusieurs activités comme favorites et l\'onglet « Recommandés » n\'est affiché que si l\'administrateur du site a défini certaines activités comme recommandées.';
+$string['activitychoosertabmode_desc'] = 'Le sélecteur d\'activité permet au intervenant de choisir facilement les activités et ressources à ajouter à leur séquence. Ce réglage détermine les onglets à y afficher. L\'onglet « Favoris » n\'est affiché que si l\'utilisateur a marqué une ou plusieurs activités comme favorites et l\'onglet « Recommandés » n\'est affiché que si l\'administrateur du site a défini certaines activités comme recommandées.';
 $string['aria:coursecategory'] = 'Catégorie de séquence';
 $string['aria:courseimage'] = 'Image de la séquence';
 $string['aria:coursename'] = 'Nom de la séquence';
@@ -35,10 +35,10 @@ $string['coursealreadyfinished'] = 'Séquence déjà terminée';
 $string['coursenotyetfinished'] = 'La séquence n\'est pas encore terminée';
 $string['coursenotyetstarted'] = 'La séquence n\'a pas encore commencé';
 $string['coursetoolong'] = 'La séquence est trop longue';
-$string['customfield_visibletoteachers'] = 'Formateurs';
+$string['customfield_visibletoteachers'] = 'Intervenants';
 $string['customfieldsettings'] = 'Réglages des champs personnalisés des séquences communes';
 $string['downloadcoursecontent'] = 'Télécharger les contenus de la séquence';
-$string['downloadcoursecontent_help'] = 'Ce réglage détermine si les contenus de séquence peuvent être téléchargés par les utilisateurs disposant de la capacité adéquate (par défaut ceux qui ont le rôle de stagiaire ou de formateur).';
+$string['downloadcoursecontent_help'] = 'Ce réglage détermine si les contenus de séquence peuvent être téléchargés par les utilisateurs disposant de la capacité adéquate (par défaut ceux qui ont le rôle de stagiaire ou de intervenant).';
 $string['enabledownloadcoursecontent'] = 'Activer le téléchargement de contenus de séquence';
 $string['errorendbeforestart'] = 'La date de fin ({$a}) est antérieure à la date du début de la séquence.';
 $string['favourite'] = 'Séquence marquée comme favorite';
@@ -49,7 +49,7 @@ $string['nocourseendtime'] = 'La séquence n\'a pas de date de fin';
 $string['nocoursesections'] = 'Aucune séance de séquence';
 $string['nocoursestudents'] = 'Aucun stagiaire';
 $string['norecentaccessesinfomessage'] = 'Bonjour {$a->userfirstname}, <p>Certains stagiaire de la séquence {$a->coursename} n\'ont pas accédé récemment à la séquence.</p>';
-$string['noteachinginfomessage'] = 'Bonjour {$a->userfirstname}, <p>Des séquences dont la date de début est fixée la semaine prochaine ont été identifiées comme sans formateur ou sans inscription de stagiaire.</p>';
+$string['noteachinginfomessage'] = 'Bonjour {$a->userfirstname}, <p>Des séquences dont la date de début est fixée la semaine prochaine ont été identifiées comme sans intervenant ou sans inscription de stagiaire.</p>';
 $string['privacy:completionpath'] = 'Achèvement de séquence';
 $string['privacy:favouritespath'] = 'Information sur le marquage comme favorite de la séquence';
 $string['privacy:metadata:activityfavouritessummary'] = 'Le système des séquences contient des informations sur les éléments du sélecteur d\'activités qui ont été marqués comme favoris par l\'utilisateur.';
@@ -74,7 +74,7 @@ $string['target:norecentaccesses_help'] = 'Cette cible identifie les stagiaires 
 $string['target:norecentaccessesinfo'] = 'Les stagiaires suivants n\'ont pas accédé aux séquences auxquels ils sont inscrits dans l\'intervalle d\'analyse fixé (par défaut le mois dernier).';
 $string['target:noteachingactivity'] = 'Séquences risquant de ne pas avoir lieu';
 $string['target:noteachingactivity_help'] = 'Cette cible décrit si les séquences devant commencer durant la semaine à venir ont des activités d\'enseignement.';
-$string['target:noteachingactivityinfo'] = 'Les séquences suivantes devant commencer les jours prochains risquent de ne pas pouvoir commencer parce qu\'elles n\'ont pas de formateur ou de stagiaire inscrits.';
+$string['target:noteachingactivityinfo'] = 'Les séquences suivantes devant commencer les jours prochains risquent de ne pas pouvoir commencer parce qu\'elles n\'ont pas de intervenant ou de stagiaire inscrits.';
 $string['targetlabelstudentcompetenciesno'] = 'Stagiaire qui atteindra probablement les compétences attribuées à une séquence';
 $string['targetlabelstudentcompetenciesyes'] = 'Stagiaire qui n\'atteindra probablement pas les compétences attribuées à une séquence';
 $string['targetlabelstudentcompletionno'] = 'Stagiaire qui remplira probablement les conditions d\'achèvement de la séquence';

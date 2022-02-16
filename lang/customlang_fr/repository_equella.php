@@ -25,4 +25,4 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$string['selectrestriction.desc'] = 'Choisir si les formateurs sont capables de ne sélectionner qu\'un résumé d\'élément, que des ressources jointes ou les deux';
+$string['selectrestriction.desc'] = 'Choisir si les intervenants sont capables de ne sélectionner qu\'un résumé d\'élément, que des ressources jointes ou les deux';

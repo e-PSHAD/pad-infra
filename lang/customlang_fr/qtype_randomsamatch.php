@@ -25,4 +25,4 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$string['insufficientoptions'] = 'Il n\'y a pas assez d\'options à sélectionner pour cette question, qui ne peut donc être affichée dans le test. Veuillez en informer votre formateur.';
+$string['insufficientoptions'] = 'Il n\'y a pas assez d\'options à sélectionner pour cette question, qui ne peut donc être affichée dans le test. Veuillez en informer votre intervenant.';

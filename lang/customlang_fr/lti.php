@@ -25,10 +25,10 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$string['delegate'] = 'Déléguer au formateur';
-$string['delegate_tool'] = 'Comme spécifié dans la définition de Liens profond ou déléguer au formateur';
+$string['delegate'] = 'Déléguer au intervenant';
+$string['delegate_tool'] = 'Comme spécifié dans la définition de Liens profond ou déléguer au intervenant';
 $string['indicator:cognitivedepth_help'] = 'Cet indicateur est basé sur la profondeur cognitive atteinte par le stagiaire dans une activité LTI.';
 $string['indicator:socialbreadth_help'] = 'Cet indicateur se base sur l\'interaction sociale atteinte par le stagiaire dans une activité LTI.';
 $string['lti:addcoursetool'] = 'Ajouter des configurations d\'outils externes propres à une séquence';
-$string['tooldescription_help'] = 'La description de l\'outil qui sera affichée aux formateurs, dans la liste des activités. Elle devrait indiquer de quel outil il s\'agit, à quoi il sert et toute autre information utile au formateur.';
-$string['typename_help'] = 'Le nom de l\'outil est utilisé pour identifier le fournisseur de l\'outil dans Moodle. Le nom saisi sera visible pour les formateurs lors de l\'ajout d\'outils externes dans leurs séquences.';
+$string['tooldescription_help'] = 'La description de l\'outil qui sera affichée aux intervenants, dans la liste des activités. Elle devrait indiquer de quel outil il s\'agit, à quoi il sert et toute autre information utile au intervenant.';
+$string['typename_help'] = 'Le nom de l\'outil est utilisé pour identifier le fournisseur de l\'outil dans Moodle. Le nom saisi sera visible pour les intervenants lors de l\'ajout d\'outils externes dans leurs séquences.';

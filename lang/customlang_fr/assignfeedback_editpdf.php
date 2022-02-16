@@ -25,5 +25,5 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$string['enabled_help'] = 'Si ce réglage est activé, le formateur peut créer des fichiers PDF annotés lors de l\'évaluation des devoirs. Ceci permet au formateur d\'ajouter des commentaires, des croquis et des tampons directement dans le travail du stagiaire. L\'annotation s\'effectue dans le navigateur, sans nécessiter d\'autre logiciel.';
-$string['privacy:metadata:tablepurpose'] = 'Enregistre les commentaires en liste rapide spécifiés par le formateur';
+$string['enabled_help'] = 'Si ce réglage est activé, le intervenant peut créer des fichiers PDF annotés lors de l\'évaluation des devoirs. Ceci permet au intervenant d\'ajouter des commentaires, des croquis et des tampons directement dans le travail du stagiaire. L\'annotation s\'effectue dans le navigateur, sans nécessiter d\'autre logiciel.';
+$string['privacy:metadata:tablepurpose'] = 'Enregistre les commentaires en liste rapide spécifiés par le intervenant';

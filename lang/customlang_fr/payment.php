@@ -25,4 +25,4 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$string['accountname_help'] = 'Le nom sous lequel apparaîtra ce compte pour les formateurs ou les gestionnaires qui mettent en place des paiements (par exemple dans le plugin d\'inscription à la séquence).';
+$string['accountname_help'] = 'Le nom sous lequel apparaîtra ce compte pour les intervenants ou les gestionnaires qui mettent en place des paiements (par exemple dans le plugin d\'inscription à la séquence).';

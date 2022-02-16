@@ -25,7 +25,7 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$string['enabled_help'] = 'Si ce réglage est activé, le formateur pourra télécharger, puis déposer un formulaire d\'évaluation comprenant les notes des stagiaires.';
+$string['enabled_help'] = 'Si ce réglage est activé, le intervenant pourra télécharger, puis déposer un formulaire d\'évaluation comprenant les notes des stagiaires.';
 $string['feedbackupdate'] = 'Remplir le champ « {$a->field} » avec le texte« {$a->text} » pour le stagiaire « {$a->student} »';
 $string['gradesfile_help'] = 'Le formulaire d\'évaluation avec les notes modifiées. Ce fichier doit être un fichier CSV encodé en UTF-8, qui a été téléchargé depuis le devoir, et doit contenir des colonnes pour les notes des stagiaires et leur identifiant.';
 $string['gradeupdate'] = 'Mettre la note {$a->grade} au stagiaire {$a->student}';

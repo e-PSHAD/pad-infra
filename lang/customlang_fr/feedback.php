@@ -27,13 +27,13 @@ defined('MOODLE_INTERNAL') || die();
 
 $string['courseid'] = 'Identifiant de séquence';
 $string['drop_feedback'] = 'Retirer de cette séquence';
-$string['email_notification_help'] = 'Si ce réglage est activé, les formateurs recevront par courriel de notification de remise des feedbacks.';
+$string['email_notification_help'] = 'Si ce réglage est activé, les intervenants recevront par courriel de notification de remise des feedbacks.';
 $string['feedback:mapcourse'] = 'Associer des séquences aux feedbacks globaux';
 $string['filter_by_course'] = 'Filtrer par séquence';
 $string['indicator:cognitivedepth_help'] = 'Cet indicateur est basé sur la profondeur cognitive atteinte par le stagiaire dans une activité Feedback.';
 $string['indicator:socialbreadth_help'] = 'Cet indicateur se base sur l\'interaction sociale atteinte par le stagiaire dans une activité Feedback.';
 $string['mapcourse'] = 'Associer les feedbacks aux séquences';
-$string['modulename_help'] = 'Le module d\'activité feedback permet au formateur de créer un questionnaire d\'enquête personnalisé pour collecter des informations de la part des participants au moyen de divers types de questions, notamment à choix multiple ou à réponses courtes. Si désiré, les réponses peuvent être anonymes et les résultats affichés à tous les participants ou aux formateurs seulement. Une activité feedback affichée sur la page d\'accueil du site peut également être remplie par des utilisateurs non connectés. Les activités feedback peuvent être utilisées pour : * l\'évaluation des séquences, afin d\'améliorer les contenus pour des participants ultérieurs * permettre aux participants de s\'inscrire à des modules de séquence, des manifestations, etc. * des enquêtes anonymes sur les choix de séquence, les règlements d\'écoles, etc. * des enquêtes anti-harcèlement dans lesquelles les participants annoncent anonymement des incidents';
+$string['modulename_help'] = 'Le module d\'activité feedback permet au intervenant de créer un questionnaire d\'enquête personnalisé pour collecter des informations de la part des participants au moyen de divers types de questions, notamment à choix multiple ou à réponses courtes. Si désiré, les réponses peuvent être anonymes et les résultats affichés à tous les participants ou aux intervenants seulement. Une activité feedback affichée sur la page d\'accueil du site peut également être remplie par des utilisateurs non connectés. Les activités feedback peuvent être utilisées pour : * l\'évaluation des séquences, afin d\'améliorer les contenus pour des participants ultérieurs * permettre aux participants de s\'inscrire à des modules de séquence, des manifestations, etc. * des enquêtes anonymes sur les choix de séquence, les règlements d\'écoles, etc. * des enquêtes anti-harcèlement dans lesquelles les participants annoncent anonymement des incidents';
 $string['non_respondents_students'] = 'Stagiaires sans réponse ({$a})';
 $string['search_course'] = 'Rechercher séquence';
 $string['searchcourses'] = 'Rechercher les séquences';

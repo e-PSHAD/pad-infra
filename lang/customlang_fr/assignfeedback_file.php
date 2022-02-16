@@ -26,7 +26,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 $string['batchoperationconfirmuploadfiles'] = 'Déposer un ou plusieurs fichiers de feedback pour tous les stagiaires sélectionnés ?';
-$string['enabled_help'] = 'Si ce réglage est activé, le formateur peut déposer des fichiers comme feedback lors de l\'évaluation des devoirs. Ces fichiers peuvent être, par exemple mais pas seulement, les travaux des stagiaires annotés, des documents avec des commentaires ou des feedbacks audio.';
+$string['enabled_help'] = 'Si ce réglage est activé, le intervenant peut déposer des fichiers comme feedback lors de l\'évaluation des devoirs. Ces fichiers peuvent être, par exemple mais pas seulement, les travaux des stagiaires annotés, des documents avec des commentaires ou des feedbacks audio.';
 $string['feedbackfileadded'] = 'Nouveau fichier de feedback « {$a->filename} » pour le stagiaire « {$a->student} »';
 $string['feedbackfileupdated'] = 'Fichier de feedback « {$a->filename} » modifié pour le stagiaire « {$a->student} »';
-$string['privacy:metadata:filepurpose'] = 'Fichiers de feedback du formateur pour le stagiaire.';
+$string['privacy:metadata:filepurpose'] = 'Fichiers de feedback du intervenant pour le stagiaire.';

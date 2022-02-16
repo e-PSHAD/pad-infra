@@ -25,5 +25,5 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$string['privacy:metadata:filepurpose'] = 'Fichiers de feedback du formateur pour le stagiaire.';
+$string['privacy:metadata:filepurpose'] = 'Fichiers de feedback du intervenant pour le stagiaire.';
 $string['privacy:metadata:tablesummary'] = 'Ceci enregistre les commentaires de l\'évaluateur fait comme feedback au stagiaire sur son devoir.';

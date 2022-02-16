@@ -27,6 +27,6 @@ defined('MOODLE_INTERNAL') || die();
 
 $string['expiredaction_help'] = 'Sélectionnez une action à effectuer lorsque l\'inscription du participant arrive à échéance. Veuillez noter que certaines données et réglages de l\'utilisateur sont supprimées lors de la désinscription d\'une séquence.';
 $string['mailstudents'] = 'Notifier les stagiaires';
-$string['mailteachers'] = 'Notifier les formateurs';
+$string['mailteachers'] = 'Notifier les intervenants';
 $string['paypal:unenrol'] = 'Désinscrire des utilisateurs d\'une séquence';
 $string['paypal:unenrolself'] = 'Se désinscrire d\'une séquence';

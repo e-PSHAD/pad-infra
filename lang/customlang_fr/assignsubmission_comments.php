@@ -25,4 +25,4 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$string['privacy:metadata:commentpurpose'] = 'Commentaires échangés entre stagiaire et formateur sur un devoir remis.';
+$string['privacy:metadata:commentpurpose'] = 'Commentaires échangés entre stagiaire et intervenant sur un devoir remis.';
