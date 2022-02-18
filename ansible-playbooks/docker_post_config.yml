@@ -54,7 +54,7 @@
         container: "{{ docker.webserver_name }}"
         command: >
           /bin/bash -c
-          "moosh -n config-set {{ item.key }} "{{ item.value }}" {{ item.plugin | default('core') }}"
+          "moosh -n config-set {{ item.key }} \"{{ item.value }}\" {{ item.plugin | default('core') }}"
         chdir: "{{ moodle_path }}"
       loop: "{{ config }}"
       register: result
