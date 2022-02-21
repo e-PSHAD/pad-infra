@@ -55,6 +55,27 @@
         chdir: "{{ moodle_path }}"
       tags: courses
 
+    - name: Set HTML format for category description and course summary
+      block:
+      # Force category description format to HTML since this is not set by default after import.
+      - name: Set HTML format for category description
+        community.docker.docker_container_exec:
+          container: "{{ docker.webserver_name }}"
+          command: >
+            /bin/bash -c
+            "moosh -n sql-run \"UPDATE {{ db_config.table_prefix }}course_categories SET descriptionformat = 1\""
+          chdir: "{{ moodle_path }}"
+        tags: categories
+      # Force course summary format to HTML since this is not set by default after import (except for home page).
+      - name: Set HTML format for course summary
+        community.docker.docker_container_exec:
+          container: "{{ docker.webserver_name }}"
+          command: >
+            /bin/bash -c
+            "moosh -n sql-run \"UPDATE {{ db_config.table_prefix }}course SET summaryformat = 1 WHERE id > 1\""
+          chdir: "{{ moodle_path }}"
+        tags: courses
+
     - name: Create user accounts and course enrolments
       community.docker.docker_container_exec:
         container: "{{ docker.webserver_name }}"
