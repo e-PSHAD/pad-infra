@@ -14,6 +14,8 @@
           host_url: "https://www.{{ moodle_config.hostname }}"
           install_path: "{{ moodle_config.install.prefix }}/{{ moodle_config.hostname }}"
           download_url: "https://github.com/e-PSHAD/PAD/archive/refs/tags/{{ moodle_config.version_tag }}.tar.gz"
+          french_pack_url: https://download.moodle.org/langpack/3.11/fr.zip
+          custom_pack_url: https://github.com/e-PSHAD/pad-infra/raw/main/lang/customlang_fr.zip
 
     # Step 1
     - name: Create moodledata directory
@@ -81,7 +83,24 @@
       become_user: "{{ webserver.webuser }}"
       when: not moodle_config_php.stat.exists
 
-    # Step 4 - setup cron job, default periodicity is * * * * * (every minute, as recommended by Moodle - https://docs.moodle.org/311/en/Cron)
+    # Step 4 - install language packs
+    - name: Install french language pack
+      ansible.builtin.unarchive:
+        src: "{{ moodle_vars.french_pack_url }}"
+        dest: "{{ moodle_config.dataroot.path }}/lang"
+        owner: "{{ webserver.webuser }}"
+        group: "{{ webserver.webgroup }}"
+        remote_src: yes
+
+    - name: Install customized strings for language pack
+      ansible.builtin.unarchive:
+        src: "{{ moodle_vars.custom_pack_url }}"
+        dest: "{{ moodle_config.dataroot.path }}/lang/fr_local"
+        owner: "{{ webserver.webuser }}"
+        group: "{{ webserver.webgroup }}"
+        remote_src: yes
+
+    # Step 5 - setup cron job, default periodicity is * * * * * (every minute, as recommended by Moodle - https://docs.moodle.org/311/en/Cron)
     - name: Setup Moodle cron job
       cron:
         name: "Moodle Cron"
