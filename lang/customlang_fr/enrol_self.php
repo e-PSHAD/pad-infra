@@ -26,6 +26,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 $string['customwelcomemessage_help'] = 'Un message d\'accueil personnalisé peut être ajouté en texte pur ou en format Moodle, avec des balises HTML et la syntaxe multilingue. Les paramètres suivants peuvent être inclus dans le message : * nom de la séquence {$a->coursename} * lien vers le profil de l\'utilisateur {$a->profileurl} * adresse de courriel de l\'utilisateur {$a->email} * nom complet de l\'utilisateur {$a->fullname}';
+$string['enrolme'] = 'M\'inscrire à l\'atelier';
 $string['expiredaction_help'] = 'Sélectionner une action à effectuer à l\'échéance de l\'inscription des utilisateurs. Veuillez noter que des données utilisateur et des réglages sont effacés de la séquence lors de la désinscription de la séquence.';
 $string['expirymessageenrolledbody'] = 'Cher {$a->user}, Ce message est une notification de la prochaine échéance le {$a->timeend} de votre inscription à la séquence « {$a->course} ». Si vous avez besoin d\'aide, veuillez contacter {$a->enroller}.';
 $string['expirymessageenrollerbody'] = 'L\'auto-inscription dans la séquence « {$a->course} » arrivera à échéance dans {$a->threshold} pour les utilisateurs suivants : {$a->users} Pour prolonger leur inscription, visitez {$a->extendurl}';
@@ -33,6 +34,7 @@ $string['groupkey_help'] = 'En plus de restreindre l\'accès à la séquence aux
 $string['longtimenosee_help'] = 'Si un participant ne visite pas une séquence durant ce laps de temps, il est automatiquement désinscrit de cette séquence.';
 $string['newenrols_desc'] = 'Permettre par défaut à des utilisateurs de s\'inscrire eux-mêmes à de nouvelles séquences.';
 $string['newenrols_help'] = 'Ce réglage détermine si un utilisateur peut s\'inscrire lui-même à cette séquence.';
+$string['password'] = 'Un code d\'inscription est requis :';
 $string['password_help'] = 'Une clef d\'inscription permet de restreindre l\'accès à la séquence aux seuls utilisateurs qui connaissent la clef. Si le champ n\'est pas renseigné, n\'importe quel utilisateur peut s\'inscrire à la séquence. Si une clef d\'inscription est spécifiée, les utilisateurs tentant de s\'inscrire à la séquence devront saisir cette clef, uniquement lors de leur premier accès à la séquence.';
 $string['pluginname_desc'] = 'Le plugin d\'auto-inscription permet aux utilisateurs de choisir les séquences qu\'ils veulent suivre. Les séquences peuvent être protégées par une clef d\'inscription. À l\'interne, l\'inscription est effectuée au moyen du plugin Inscription manuelles, qui doit être activé pour la même séquence.';
 $string['requirepassword_desc'] = 'Exiger la clef d\'inscription dans les nouvelles séquences et empêcher la suppression de la clef d\'inscription des séquences existantes.';

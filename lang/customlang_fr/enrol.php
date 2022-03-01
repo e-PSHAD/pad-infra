@@ -54,5 +54,5 @@ $string['unassignnotpermitted'] = 'Vous n\'avez pas les permissions requises pou
 $string['unenrolconfirm'] = 'Voulez-vous vraiment désinscrire « {$a->user} » (inscrit via « {$a->enrolinstancename} ») de la séquence « {$a->course} » ?';
 $string['unenrolleduser'] = 'L\'utilisateur « {$a->fullname} » a été désinscrit de la séquence.';
 $string['unenrolnotpermitted'] = 'Vous n\'avez pas les permissions requises pour désinscrire cet utilisateur de cette séquence.';
-$string['youenrolledincourse'] = 'Vous être inscrit à la séquence.';
-$string['youunenrolledfromcourse'] = 'Vous êtes désinscrit de la séquence « {$a} ».';
+$string['youenrolledincourse'] = 'Votre inscription a bien été pris en compte.';
+$string['youunenrolledfromcourse'] = 'Vous êtes bien désinscrit de « {$a} ».';
