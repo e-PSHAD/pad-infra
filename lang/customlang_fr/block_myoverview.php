@@ -27,6 +27,7 @@ defined('MOODLE_INTERNAL') || die();
 
 $string['addtofavourites'] = 'Marquer comme favorite';
 $string['all'] = 'Tout (sauf séquences retirées de l\'affichage)';
+$string['allincludinghidden'] = 'Toutes mes séquences ({$a})';
 $string['aria:allcourses'] = 'Montrer toutes les séquences, sauf celles qui sont retirées de l\'affichage';
 $string['aria:allcoursesincludinghidden'] = 'Montrer toutes les séquences';
 $string['aria:controls'] = 'Paramètres de la vue d\'ensemble des séquences';

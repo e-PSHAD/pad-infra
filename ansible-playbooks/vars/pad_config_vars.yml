@@ -60,16 +60,20 @@ config:
     value: ''
     plugin: tool_mobile
 
-  # Dashboard
-  - # disable 'all courses' filter on dashboard overview block
+  # Dashboard/My courses
+  - # enable 'all courses' filter on course overview block
+    key: displaygroupingallincludinghidden
+    value: 1
+    plugin: block_myoverview
+  - # disable 'all courses excluding hidden' filter on course overview block
     key: displaygroupingall
     value: 0
     plugin: block_myoverview
-  - # disable 'hidden courses' filter on dashboard overview block
+  - # disable 'hidden courses' filter on course overview block
     key: displaygroupinghidden
     value: 0
     plugin: block_myoverview
-  - # remove 'summary' from layouts in dashboard overview block
+  - # remove 'summary' from layouts in course overview block
     key: layouts
     value: card,list
     plugin: block_myoverview
