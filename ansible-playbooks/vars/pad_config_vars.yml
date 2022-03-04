@@ -47,6 +47,9 @@ config:
       accessibility = accessibilitychecker, accessibilityhelper
       other = html
     plugin: editor_atto
+  - # Set number of courses per page
+    key: coursesperpage
+    value: 10
 
   # Mobile service
   -
