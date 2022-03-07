@@ -37,7 +37,7 @@ config:
       collapse = collapse
       style1 = title, bold, italic
       list = unorderedlist, orderedlist, indent
-      colors = fontcolor, backcolor
+      colors = fontcolor
       links = link
       files = emojipicker, image, media, recordrtc, managefiles, h5p
       style2 = underline, strike, subscript, superscript
