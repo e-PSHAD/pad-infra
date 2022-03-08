@@ -51,6 +51,17 @@ config:
     key: coursesperpage
     value: 10
 
+  # Global search
+  - # enable search results in all courses available to user
+    key: searchallavailablecourses
+    value: 1
+  - # enable search results in all visible courses
+    key: searchincludeallcourses
+    value: 1
+  - # display search results in tabs
+    key: searchenablecategories
+    value: 1
+
   # Mobile service
   -
     key: enablemobilewebservice
