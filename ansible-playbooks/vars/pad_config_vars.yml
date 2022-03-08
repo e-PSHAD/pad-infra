@@ -89,6 +89,16 @@ config:
     value: card,list
     plugin: block_myoverview
 
+  # Courses
+  - # display one page per course session
+    key: coursedisplay
+    value: 1
+    plugin: moodlecourse
+  - # disable default 'Announcements' forum
+    key: newsitems
+    value: 0
+    plugin: moodlecourse
+
 capabilities:
   # -
   #   role: role short name (see moosh role-list)
