@@ -47,9 +47,13 @@ config:
       accessibility = accessibilitychecker, accessibilityhelper
       other = html
     plugin: editor_atto
-  - # Set number of courses per page
+  - # set number of courses per page
     key: coursesperpage
     value: 10
+  - # disable Moodle competency framework
+    key: enabled
+    value: 0
+    plugin: core_competency
 
   # Global search
   - # enable search results in all courses available to user
