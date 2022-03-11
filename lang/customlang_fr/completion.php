@@ -44,6 +44,7 @@ $string['coursecompletion'] = 'Achèvement de séquence';
 $string['coursegrade'] = 'Note de la séquence';
 $string['coursesavailable'] = 'Séquences disponibles';
 $string['dependenciescompleted'] = 'Achèvement d\'autres séquences';
+$string['detail_desc:view'] = 'À consulter';
 $string['editcoursecompletionsettings'] = 'Modifier les réglages d\'achèvement de la séquence';
 $string['enablecompletion_help'] = 'Si ce réglage est activé, des conditions d\'achèvement peuvent être définies dans les réglages des activités et/ou dans les conditions d\'achèvement de séquence. Il est recommandé d\'activer ce réglage afin que le tableau de bord de progression de la séquence puisse afficher des données significatives.';
 $string['err_nocourses'] = 'Le suivi de l\'achèvement n\'est activé dans aucune séquence. Vous pouvez activer le suivi d\'achèvement de séquence dans les réglages de chaque séquence.';
