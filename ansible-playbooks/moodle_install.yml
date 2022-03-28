@@ -73,7 +73,6 @@
         --adminuser={{ moodle_config.adminuser }}
         --adminpass='{{ moodle_config.adminpass }}'
         --adminemail='{{ moodle_config.adminemail }}'
-        --upgradekey='{{ moodle_config.upgrade_key }}'
         --non-interactive
         --agree-license
       args:

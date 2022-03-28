@@ -36,7 +36,8 @@ $CFG->admin     = 'admin';
 
 $CFG->directorypermissions = 02777;
 
-$CFG->upgradekey = 'put_some_password-like_value_here';
+// Optionnel : clé de protection pour les mises à jour Moodle https://docs.moodle.org/311/en/Upgrade_key
+// $CFG->upgradekey = 'put_some_password-like_value_here';
 
 require_once(__DIR__ . '/lib/setup.php');
 ```
