@@ -20,16 +20,6 @@
     - debug: var=result.msg
       tags: categories
 
-    # On-demand Task
-    - name: Remove default category (Miscellaneous)
-      community.docker.docker_container_exec:
-        container: "{{ docker.webserver_name }}"
-        command: >
-          /bin/bash -c
-          "moosh -n category-delete 1"
-        chdir: "{{ moodle_path }}"
-      tags: [never, remove-misc-category]
-
     - name: Import courses
       community.docker.docker_container_exec:
         container: "{{ docker.webserver_name }}"
@@ -52,6 +42,16 @@
         command: >
           /bin/bash -c
           "moosh -n sql-run \"UPDATE {{ db_config.table_prefix }}course_format_options SET value = 'page' WHERE format = 'singleactivity'\""
+        chdir: "{{ moodle_path }}"
+      tags: courses
+
+    # Force course option to have one page per topic/week/section since this is the recommended design for PAD+.
+    - name: Fix one page per topic/week for all courses (coursedisplay option)
+      community.docker.docker_container_exec:
+        container: "{{ docker.webserver_name }}"
+        command: >
+          /bin/bash -c
+          "moosh -n sql-run \"UPDATE {{ db_config.table_prefix }}course_format_options SET value = 1 WHERE name = 'coursedisplay'\""
         chdir: "{{ moodle_path }}"
       tags: courses
 
@@ -100,56 +100,66 @@
     - debug: var=result.stdout_lines
       tags: users_categories
 
-    # On-demand Task
-    - name: Remove matched categories and content
-      tags: [never, remove-category-and-content]
+    - name: On-demand Tasks
+      tags: never
       block:
-      - name: List categories ids
-        community.docker.docker_container_exec:
-          container: "{{ docker.webserver_name }}"
-          command: >
-            /bin/bash -c
-            "moosh -n category-list {{ item }} | awk '/^[0-9]/ {print $1}'"
-          chdir: "{{ moodle_path }}"
-        loop: "{{ import_data.remove_categories }}"
-        register: result
-      - set_fact:
-          category_ids: "{{ result.results | map(attribute='stdout_lines') | flatten }}"
-      - debug: var=category_ids
+        - name: Remove default category with id 1 (Miscellaneous)
+          community.docker.docker_container_exec:
+            container: "{{ docker.webserver_name }}"
+            command: >
+              /bin/bash -c
+              "moosh -n category-delete 1"
+            chdir: "{{ moodle_path }}"
+          tags: remove-misc-category
 
-      - name: Remove categories by id
-        community.docker.docker_container_exec:
-          container: "{{ docker.webserver_name }}"
-          command: >
-            /bin/bash -c
-            "moosh -n category-delete {{ item }}"
-          chdir: "{{ moodle_path }}"
-        loop: "{{ category_ids }}"
-        register: result
-      - debug:
-          msg: "{{ result.results | map(attribute='stdout_lines') }}"
+        - name: Remove matched categories and content
+          tags: remove-category-and-content
+          block:
+          - name: List categories ids
+            community.docker.docker_container_exec:
+              container: "{{ docker.webserver_name }}"
+              command: >
+                /bin/bash -c
+                "moosh -n category-list {{ item }} | awk '/^[0-9]/ {print $1}'"
+              chdir: "{{ moodle_path }}"
+            loop: "{{ import_data.remove_categories }}"
+            register: result
+          - set_fact:
+              category_ids: "{{ result.results | map(attribute='stdout_lines') | flatten }}"
+          - debug: var=category_ids
 
-    # On-demand Task
-    - name: Remove all existing users except guest, admin
-      tags: [never, remove-all-users]
-      block:
-      - name: List existing usernames with id > 2 (exclude guest and admin ids)
-        community.docker.docker_container_exec:
-          container: "{{ docker.webserver_name }}"
-          command: >
-            /bin/bash -c
-            "moosh -n user-list 'id > 2 AND deleted = 0' | awk '{print $1}'"
-          chdir: "{{ moodle_path }}"
-        register: result
-      - set_fact:
-          usernames: "{{ result.stdout_lines | join(' ') }}"
-      - debug: var=usernames
+          - name: Remove categories by id
+            community.docker.docker_container_exec:
+              container: "{{ docker.webserver_name }}"
+              command: >
+                /bin/bash -c
+                "moosh -n category-delete {{ item }}"
+              chdir: "{{ moodle_path }}"
+            loop: "{{ category_ids }}"
+            register: result
+          - debug:
+              msg: "{{ result.results | map(attribute='stdout_lines') }}"
 
-      - name: Remove all existing users except guest/admin
-        community.docker.docker_container_exec:
-          container: "{{ docker.webserver_name }}"
-          command: >
-            /bin/bash -c
-            "moosh -n user-delete {{ usernames }}"
-          chdir: "{{ moodle_path }}"
-        when: usernames | length > 0
+        - name: Remove all existing users except guest, admin
+          tags: remove-all-users
+          block:
+          - name: List existing usernames with id > 2 (exclude guest and admin ids)
+            community.docker.docker_container_exec:
+              container: "{{ docker.webserver_name }}"
+              command: >
+                /bin/bash -c
+                "moosh -n user-list 'id > 2 AND deleted = 0' | awk '{print $1}'"
+              chdir: "{{ moodle_path }}"
+            register: result
+          - set_fact:
+              usernames: "{{ result.stdout_lines | join(' ') }}"
+          - debug: var=usernames
+
+          - name: Remove all existing users except guest/admin
+            community.docker.docker_container_exec:
+              container: "{{ docker.webserver_name }}"
+              command: >
+                /bin/bash -c
+                "moosh -n user-delete {{ usernames }}"
+              chdir: "{{ moodle_path }}"
+            when: usernames | length > 0
