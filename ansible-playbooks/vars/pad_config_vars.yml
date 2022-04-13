@@ -145,3 +145,7 @@ capabilities:
   role: coursecreator
   capability: moodle/restore:restorecourse
   value: allow
+- # enable course creator to view email of other users
+  role: coursecreator
+  capability: moodle/site:viewuseridentity
+  value: allow
