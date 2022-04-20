@@ -28,3 +28,5 @@ defined('MOODLE_INTERNAL') || die();
 $string['contactableprivacy_coursemember'] = 'Mes contacts et tout le monde dans mes séquences';
 $string['removecoursefilter'] = 'Supprimer le filtre pour la séquence {$a}';
 $string['searchforuserorcourse'] = 'Rechercher un utilisateur ou une séquence';
+$string['seeall'] = 'Voir toutes les notifications';
+$string['viewfullnotification'] = 'Voir';
