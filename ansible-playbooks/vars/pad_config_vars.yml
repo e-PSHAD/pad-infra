@@ -103,6 +103,11 @@ config:
     value: 0
     plugin: moodlecourse
 
+  # BigBlueButton activity
+  - # enable presentation preupload in parameters
+    key: bigbluebuttonbn_preuploadpresentation_editable
+    value: 1
+
 capabilities:
   # -
   #   role: role short name (see moosh role-list)

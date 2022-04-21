@@ -1,0 +1,107 @@
+---
+- name: BigBlueButton deployment
+  hosts: visioservers
+  tasks:
+    - name: Install wget
+      apt:
+        name: wget
+        state: present
+      tags: install
+
+    - name: Run BigBlueButton install script (wait a dozen minutes...)
+      ansible.builtin.shell: >
+        wget -qO- https://ubuntu.bigbluebutton.org/bbb-install.sh
+        | bash -s -- -v {{ version }} -s {{ hostname }} -e {{ certemail }}
+        {{ '-a' if option_demos else '' }}
+        {{ '-w' if option_firewall else '' }}
+        {{ '-g' if option_greenlight else '' }}
+      register: result
+      tags: [install, install-only, install-debug]
+    - debug: var=result.stdout_lines
+      tags: [never, install-debug]
+
+    - name: Setup Greenlight
+      block:
+        - name: Setup Greenlight Admin account
+          ansible.builtin.shell: docker exec greenlight-v2 bundle exec rake admin:create
+          register: result
+        - debug: var=result.stdout_lines
+      when: option_greenlight
+      tags: [install, greenlight]
+
+    - name: Show BigBlueButton API secret
+      ansible.builtin.shell: bbb-conf --secret
+      register: result
+      tags: [install, showsecret]
+    - debug: var=result
+      tags: [install, showsecret]
+
+    - name: On-Demand Tasks
+      tags: never
+      block:
+        - name: Run BigBlueButton check
+          ansible.builtin.shell: bbb-conf --check
+          register: result
+          tags: check
+        - debug: var=result.stdout_lines
+          tags: check
+
+        - name: Run BigBlueButton status
+          ansible.builtin.shell: bbb-conf --status
+          register: result
+          tags: status
+        - debug: var=result.stdout_lines
+          tags: status
+
+        - name: Get BigBlueButton Server URL
+          ansible.builtin.shell: bbb-conf --secret | awk '/URL:/ {print $NF}'
+          register: result
+          tags: setsecret
+        - set_fact:
+            bbbserver_url: "{{ result.stdout }}"
+          tags: setsecret
+
+        - name: Get BigBlueButton secret
+          ansible.builtin.shell: bbb-conf --secret | awk '/Secret:/ {print $NF}'
+          register: result
+          tags: setsecret
+        - set_fact:
+            bbb_secret: "{{ result.stdout }}"
+          tags: setsecret
+
+        - name: Purge API demo
+          ansible.builtin.shell: apt-get purge -y bbb-demo
+          register: result
+          tags: purgedemo
+        - debug: var=result.stdout_lines
+          tags: purgedemo
+
+- hosts: webservers
+  tags: [never, setsecret]
+  tasks:
+    - name: Combine generic and inventory configurations
+      set_fact:
+        moodle_config: "{{ moodle_config | combine(moodle) }}"
+
+    - name: Compute derived parameters
+      set_fact:
+        moodle_path: "{{ moodle_config.install.prefix }}/{{ moodle_config.hostname }}"
+
+    - name: Extract BigBlueButton API parameters
+      set_fact:
+        bbbserver_url: "{{ groups['visioservers'] | map('extract', hostvars, 'bbbserver_url') | first }}"
+        bbb_secret: "{{ groups['visioservers'] | map('extract', hostvars, 'bbb_secret') | first }}"
+
+    - name: Set BigBlueButton server URL in Moodle
+      ansible.builtin.shell: >
+        sudo -u {{ webserver.webuser }}
+        moosh config-set bigbluebuttonbn_server_url "{{ bbbserver_url }}" core
+      args:
+        chdir: "{{ moodle_path }}"
+
+    - name: Set BigBlueButton secret in Moodle
+      ansible.builtin.shell: >
+        sudo -u {{ webserver.webuser }}
+        moosh config-set bigbluebuttonbn_shared_secret "{{ bbb_secret }}" core
+      args:
+        chdir: "{{ moodle_path }}"
