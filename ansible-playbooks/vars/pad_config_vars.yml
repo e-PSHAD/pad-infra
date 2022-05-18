@@ -54,6 +54,15 @@ config:
     key: enabled
     value: 0
     plugin: core_competency
+  - # disable user comments block
+    key: usecomments
+    value: 0
+  - # disable personal notes on other users
+    key: enablenotes
+    value: 0
+  - # disable personal blogs
+    key: enableblogs
+    value: 0
 
   # Global search
   - # enable search results in all courses available to user
