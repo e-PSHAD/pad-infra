@@ -25,8 +25,13 @@
 
 defined('MOODLE_INTERNAL') || die();
 
+$string['config_disablenote_default'] = 'Le réglage « Désactiver les évaluations partagées » est activée par défaut';
+$string['config_disablenote_default_description'] = 'Si activé, les évaluations partagées seront désactivées.';
+$string['config_disablenote_editable'] = 'Le réglage « Désactiver les évaluations partagées » peut être modifiée';
+$string['config_disablenote_editable_description'] = 'Le réglage « Désactiver les évaluations partagées » peut être modifiée quand la conférence est ajoutée ou mise à jour.';
 $string['config_importrecordings_enabled_description'] = 'Quand ce paramètre et l\'option enregistrement sont autorisés, il est possible d\'importer des enregistrements de différentes séquences dans une activité.';
 $string['email_footer_sent_from'] = 'de la séquence';
+$string['mod_form_field_disablenote'] = 'Désactiver les évaluations partagées';
 $string['mod_form_field_wait'] = 'Les stagiaires doivent attendre qu\'un modérateur soit présent';
 $string['view_error_no_group_student'] = 'Vous n\'avez pas été inscrit dans un groupe. Veuillez contacter votre intervenant, ou l\'administrateur.';
 $string['view_error_unable_join_student'] = 'Impossible de se connecter au serveur BigBlueButton (module de classe virtuelle). Veuillez contacter votre froamteur ou l\'administrateur.';

@@ -25,4 +25,5 @@
 
 defined('MOODLE_INTERNAL') || die();
 
+$string['enableavailability_desc'] = 'Si ce réglage est activé, des conditions (basées sur la date, une évaluation ou la fin d\'une activité) peuvent être définies qui déterminent si une activité ou une ressource est disponible.';
 $string['listheader_sign_before'] = 'Le stagiaire';

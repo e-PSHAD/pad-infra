@@ -25,4 +25,10 @@
 
 defined('MOODLE_INTERNAL') || die();
 
+$string['default_help'] = 'Si ce réglage est activé, cette méthode de remise de travaux sera activée par défaut pour tous les nouveaux travaux.';
+$string['nosubmission'] = 'Aucun travail n\'a encore été remis pour ce travail';
+$string['numwordsforlog'] = 'Nombre de mot du travail : {$a} mots';
+$string['privacy:metadata:assignmentid'] = 'Identifiant du travail';
+$string['privacy:metadata:textpurpose'] = 'Le texte remis pour cette remise du travail.';
 $string['wordlimit_help'] = 'Si les travaux en format texte sont activés, ce réglage indique le nombre maximal de mots que les stagiaires peuvent remettre.';
+$string['wordlimitexceeded'] = 'Le nombre maximal de mots pour ce travail est de {$a->limit} mots, alors que vous essayez de remettre un travail de {$a->count} mots. Veuillez retravailler votre travail et essayer à nouveau.';

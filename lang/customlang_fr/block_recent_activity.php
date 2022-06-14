@@ -25,6 +25,6 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$string['privacy:metadata:block_recent_activity'] = 'Journal temporaire des activités récentes de intervenants. Supprimé après deux jours.';
+$string['privacy:metadata:block_recent_activity'] = 'Journal temporaire des activités récentes des intervenants. Supprimé après deux jours.';
 $string['privacy:metadata:block_recent_activity:cmid'] = 'Identifiant de l\'activité de la séquence';
 $string['privacy:metadata:block_recent_activity:courseid'] = 'Identifiant de la séquence';

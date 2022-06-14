@@ -26,3 +26,4 @@
 defined('MOODLE_INTERNAL') || die();
 
 $string['description'] = 'Requiert l\'achèvement (ou le non-achèvement) d\'une autre activité par les stagiaires.';
+$string['error_selectcmidpassfail'] = 'Une activité avec la condition d\'achèvement « Requiert une évaluation » doit être sélectionnée.';

@@ -26,7 +26,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 $string['allowcoursethemes'] = 'Autoriser les thèmes de séquence';
-$string['alternativefullnameformat_desc'] = 'Ce réglage définit comment les noms sont affichés aux utilisateurs disposant de la capacité <em>viewfullnames</em> (par défaut, les utilisateurs ayant le rôle de gestionnaire, de intervenant ou de intervenant non éditeur). Les paramètres fictifs pouvant être utilisés sont les mêmes que ceux du réglage « Format d\'affichage des noms complets ».';
+$string['alternativefullnameformat_desc'] = 'Ce réglage définit comment les noms sont affichés aux utilisateurs disposant de la capacité <em>viewfullnames</em> (par défaut, les utilisateurs ayant le rôle de gestionnaire, d\'intervenant ou d\'intervenant non éditeur). Les paramètres fictifs pouvant être utilisés sont les mêmes que ceux du réglage « Format d\'affichage des noms complets ».';
 $string['backup_shortname'] = 'Utiliser le nom de la séquence dans le nom du fichier de sauvegarde';
 $string['backup_shortnamehelp'] = 'Utiliser le nom de la séquence dans le nom du fichier de sauvegarde';
 $string['calendartype_desc'] = 'Sélectionner un type de calendrier par défaut pour tout le site. Ce réglage peut être court-circuité dans les réglages de chaque séquence ou par les utilisateurs dans leur profil personnel.';
@@ -47,7 +47,7 @@ $string['configdefaultuserroleid'] = 'Tous les utilisateurs connectés auront le
 $string['configenableanalytics'] = 'Les modèles d\'analyse de données, par exemple « Stagiaires en risque de décrochage » ou « Activités à venir à effectuer », peuvent générer des prédictions, envoyer des notifications d\'indications et offrir d\'autres actions, comme l\'envoi de messages aux utilisateurs.';
 $string['configfrontpagecourselimit'] = 'Nombre maximal de séquences';
 $string['configfrontpagecourselimithelp'] = 'Ce réglage détermine le nombre maximal de séquences à afficher dans les listes de séquence sur la page d\'accueil du site.';
-$string['configgradebookroles'] = 'Ce réglage permet de configurer les rôles apparaissant dans le carnet de notes. Pour être mentionnés dans le carnet de notes d\'une séquence, les utilisateurs doivent avoir au moins l\'un de ces rôles dans cette séquence.';
+$string['configgradebookroles'] = 'Ce réglage permet de configurer les rôles apparaissant dans le livret des évaluations. Pour être mentionnés dans le livret des évaluations d\'une séquence, les utilisateurs doivent avoir au moins l\'un de ces rôles dans cette séquence.';
 $string['confighiddenuserfields'] = 'Veuillez sélectionner quelles informations vous désirez cacher aux autres utilisateurs de la séquence que les administrateurs/intervenants. Vous pourrez ainsi améliorer la protection des données des stagiaires. Il est possible de sélectionner plusieurs champs.';
 $string['configmaxusersperpage'] = 'Nombre maximum d\'utilisateurs affichés dans les champs de sélection d\'utilisateurs des séquences, groupes, cohortes, services web, etc.';
 $string['configrequestedstudentname'] = 'Terme utilisé pour « stagiaire » dans les séquences demandées';
@@ -72,6 +72,8 @@ $string['courses'] = 'Séquences';
 $string['coursesperpage'] = 'Séquences par page';
 $string['creatornewroleid'] = 'Rôle des contributeurs dans les nouvelles séquences';
 $string['creatornewroleid_help'] = 'Si l\'utilisateur n\'a pas déjà les permissions requises pour gérer la nouvelle séquence, il y sera automatiquement inscrit avec ce rôle.';
+$string['gradebook'] = 'Livret des évaluations';
+$string['gradeexport'] = 'Modules principaux d\'exportation des évaluations';
 $string['guestroleid_help'] = 'Ce rôle est automatiquement attribué au compte Utilisateur anonyme. Il est également attribué temporairement aux utilisateurs qui entrent dans une séquence via le plugin d\'inscription des utilisateurs anonymes.';
 $string['hidefromstudents'] = 'Cacher pour les stagiaires';
 $string['legacyfilesinnewcourses'] = 'Fichiers de la séquence (obsolète) dans les nouvelles séquences';

@@ -25,4 +25,7 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$string['description'] = 'Requiert l\'atteinte d\'une note minimale par les stagiaires';
+$string['description'] = 'Requiert l\'atteinte d\'une évaluation minimale par les stagiaires';
+$string['requires_any'] = 'Vous avez une évaluation dans <strong>{$a}</strong>';
+$string['requires_notany'] = 'Vous n\'avez pas d\'évaluation dans <strong>{$a}</strong>';
+$string['title'] = 'Évaluation';

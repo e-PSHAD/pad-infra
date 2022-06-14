@@ -18,14 +18,12 @@
 /**
  * Local language pack from http://localhost:8000
  *
- * @package    assignfeedback
- * @subpackage editpdf
+ * @package    mod
+ * @subpackage h5pactivity
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
-$string['default_help'] = 'Si ce réglage est activé, cette méthode de feedback sera activée par défaut pour tous les nouveaux travaux.';
-$string['editpdf_help'] = 'Annoter directement dans le navigateur les travaux remis et produire un PDF modifié téléchargeable.';
-$string['enabled_help'] = 'Si ce réglage est activé, l\'intervenant peut créer des fichiers PDF annotés lors de l\'évaluation des travaux. Ceci permet à l\'intervenant d\'ajouter des commentaires, des croquis et des tampons directement dans le travail du stagiaire. L\'annotation s\'effectue dans le navigateur, sans nécessiter d\'autre logiciel.';
-$string['privacy:metadata:tablepurpose'] = 'Enregistre les commentaires en liste rapide spécifiés par l\'intervenant';
+$string['grade_highest_attempt'] = 'Évaluation la plus élevée';
+$string['modulename_help'] = 'H5P est l\'abréviation de « HTML5 Package » : des contenus interactifs tels que présentations, vidéos ou autres multimédia, questions, tests, jeux et plus encore. L\'activité H5P permet de déposer et de mettre à disposition un contenu H5P dans une séquence. Les réponses aux questions sont évaluées automatiquement et l\'évaluation enregistrée dans le livret des évaluations.';

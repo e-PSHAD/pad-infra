@@ -25,4 +25,5 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$string['privacy:metadata:commentpurpose'] = 'Commentaires échangés entre stagiaire et intervenant sur un devoir remis.';
+$string['default_help'] = 'Si ce réglage est activé, cette méthode de remise de travaux sera activée par défaut pour tous les nouveaux travaux.';
+$string['privacy:metadata:commentpurpose'] = 'Commentaires échangés entre stagiaire et intervenant sur un travail remis.';

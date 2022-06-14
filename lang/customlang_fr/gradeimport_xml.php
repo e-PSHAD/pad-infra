@@ -25,4 +25,4 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$string['errduplicategradeidnumber'] = 'Erreur - il y a deux notes de même identifiant « {$a} » dans cette séquence. Cela ne devrait pas être possible.';
+$string['errduplicategradeidnumber'] = 'Erreur - il y a deux évaluations de même identifiant « {$a} » dans cette séquence. Cela ne devrait pas être possible.';

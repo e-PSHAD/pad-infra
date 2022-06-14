@@ -38,6 +38,7 @@ $string['fullname'] = 'Séquence de test : {$a->size}';
 $string['maketestcourse'] = 'Créer des séquences de test';
 $string['notenoughusers'] = 'La séquence sélectionnée ne contient pas assez d\'utilisateurs';
 $string['progress_coursecompleted'] = 'Séquences achevées ({$a}s)';
+$string['progress_createassignments'] = 'Création des travaux ({$a})';
 $string['progress_createcourse'] = 'Création de la séquence {$a}';
 $string['progress_enrol'] = 'Inscription d\'utilisateurs dans une séquence ({$a})';
 $string['size'] = 'Taille de la séquence';

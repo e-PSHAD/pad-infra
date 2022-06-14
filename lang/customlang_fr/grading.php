@@ -19,18 +19,10 @@
  * Local language pack from http://localhost:8000
  *
  * @package    core
- * @subpackage plugin
+ * @subpackage grading
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
-$string['type_coursereport'] = 'Rapport de séquence';
-$string['type_coursereport_plural'] = 'Rapports de la séquence';
-$string['type_format'] = 'Format de séquence';
-$string['type_format_plural'] = 'Formats de séquence';
-$string['type_gradeexport'] = 'Méthode d\'exportation des évaluations';
-$string['type_gradeexport_plural'] = 'Méthodes d\'exportation des évaluations';
-$string['type_gradereport'] = 'Rapport de livret des évaluations';
-$string['type_gradereport_plural'] = 'Rapports de livret des évaluations';
-$string['uninstallextraconfirmmod'] = 'Il y a {$a->instances} instances de ce module dans {$a->courses} séquences.';
+$string['manageactiondeleteconfirm'] = 'Vous êtes sur le point de supprimer le formulaire d\'évaluation « {$a->formname} » et toutes les informations associées de « {$a->component} ({$a->area}) ». Veuillez vérifier que vous avez bien envisagé les conséquences suivantes : * il n\'y a aucun moyen de revenir en arrière ; * vous pouvez revenir à une autre méthode d\'évaluation, y compris l\'évaluation simple directe, sans supprimer ce formulaire ; * toutes les informations sur la façon de renseigner le formulaire seront perdues ; * les évaluations calculées enregistrées dans le livret des évaluations ne seront pas touchées. Cependant l\'explication de la façon dont elles ont été calculées ne sera pas disponible ; * cette opération n\'a pas d\'effet sur des copies éventuelles de ce formulaire dans d\'autres activités.';

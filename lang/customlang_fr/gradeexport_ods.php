@@ -25,4 +25,5 @@
 
 defined('MOODLE_INTERNAL') || die();
 
+$string['ods:publish'] = 'Publier l\'exportation des évaluations au format OpenDocument';
 $string['timeexported'] = 'Dernier téléchargement depuis cette séquence';

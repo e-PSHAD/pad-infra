@@ -25,8 +25,21 @@
 
 defined('MOODLE_INTERNAL') || die();
 
+$string['bestgrade'] = 'L\'évaluation la plus haute :';
+$string['bestgrades'] = 'Les {$a} évaluations les plus hautes :';
+$string['config_grade_format'] = 'Afficher les évaluations comme';
 $string['config_no_activities_in_course'] = 'Cette séquence ne comporte encore aucune activité.';
+$string['config_show_best'] = 'Nombre d\'évaluations les plus élevées à afficher (0 pour désactiver)';
+$string['config_show_worst'] = 'Nombre d\'évaluations les plus basses à afficher (0 pour désactiver)';
 $string['config_use_groups'] = 'Afficher les groupes au lieu des stagiaires (ne fonctionne que si l\'activité supporte les groupes)';
+$string['defaultgradedisplay'] = 'Afficher les évaluations comme';
+$string['defaultgradedisplay_desc'] = 'Affichage par défaut des évaluations';
+$string['defaulthighestgrades'] = 'Évaluations les plus hautes affichées par défaut';
+$string['defaulthighestgrades_desc'] = 'Nombre d\'évaluations les plus hautes à afficher par défaut';
+$string['defaultlowestgrades'] = 'Évaluations les plus basses affichées par défaut';
+$string['defaultlowestgrades_desc'] = 'Nombre d\'évaluations les plus basses à afficher par défaut';
 $string['defaultnameoptions_desc'] = 'Mode d\'identification des stagiaires par défaut';
 $string['defaultshowgroups_desc'] = 'Afficher par défaut les groupes au lieu des stagiaires (seulement si l\'activité permet les groupes)';
 $string['error_nogroupsexist'] = 'Erreur : le bloc est configuré pour afficher les résultats de groupes, mais la séquence ne comporte pas de groupe.';
+$string['worstgrade'] = 'Évaluation la plus basse :';
+$string['worstgrades'] = 'Les {$a} évaluations les plus basses :';

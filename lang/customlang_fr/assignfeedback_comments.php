@@ -25,5 +25,9 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$string['privacy:metadata:filepurpose'] = 'Fichiers de feedback du intervenant pour le stagiaire.';
-$string['privacy:metadata:tablesummary'] = 'Ceci enregistre les commentaires de l\'évaluateur fait comme feedback au stagiaire sur son devoir.';
+$string['commentinlinedefault_help'] = 'Si ce réglage est activé, la fonctionnalité de commentaire en ligne sera activée par défaut pour tous les nouveaux travaux.';
+$string['default_help'] = 'Si ce réglage est activé, cette méthode de feedback sera activée par défaut pour tous les nouveaux travaux.';
+$string['privacy:metadata:assignmentid'] = 'Identifiant du travail';
+$string['privacy:metadata:filepurpose'] = 'Fichiers de feedback de l\'intervenant pour le stagiaire.';
+$string['privacy:metadata:gradepurpose'] = 'L\'identifiant d\'évaluation associé au commentaire.';
+$string['privacy:metadata:tablesummary'] = 'Ceci enregistre les commentaires de l\'évaluateur fait comme feedback au stagiaire sur son travail.';

@@ -26,4 +26,6 @@
 defined('MOODLE_INTERNAL') || die();
 
 $string['descriptionstudents'] = 'Description pour stagiaires';
+$string['maxscore'] = 'Évaluation maximale';
 $string['privacy:metadata:preference:showstudentdesc'] = 'S\'il faut afficher au stagiaire la description des critères';
+$string['regrademessage5'] = 'Vous allez enregistrer d\'importantes modifications d\'un guide d\'évaluation qui a déjà été utilisé pour donner des évaluations. Les évaluations ne seront pas modifiées dans le livret des évaluations, mais le guide ne sera visible pour les participants que lorsque vous aurez réévalué leur travail.';

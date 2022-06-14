@@ -26,3 +26,4 @@
 defined('MOODLE_INTERNAL') || die();
 
 $string['timeexported'] = 'Dernier téléchargement depuis cette séquence';
+$string['xls:publish'] = 'Publier l\'exportation des évaluations au format Excel';

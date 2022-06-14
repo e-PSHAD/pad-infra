@@ -18,14 +18,11 @@
 /**
  * Local language pack from http://localhost:8000
  *
- * @package    assignfeedback
- * @subpackage editpdf
+ * @package    gradeimport
+ * @subpackage direct
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
-$string['default_help'] = 'Si ce réglage est activé, cette méthode de feedback sera activée par défaut pour tous les nouveaux travaux.';
-$string['editpdf_help'] = 'Annoter directement dans le navigateur les travaux remis et produire un PDF modifié téléchargeable.';
-$string['enabled_help'] = 'Si ce réglage est activé, l\'intervenant peut créer des fichiers PDF annotés lors de l\'évaluation des travaux. Ceci permet à l\'intervenant d\'ajouter des commentaires, des croquis et des tampons directement dans le travail du stagiaire. L\'annotation s\'effectue dans le navigateur, sans nécessiter d\'autre logiciel.';
-$string['privacy:metadata:tablepurpose'] = 'Enregistre les commentaires en liste rapide spécifiés par l\'intervenant';
+$string['userdata_help'] = 'Des évaluations peuvent être copiées dans une feuille de calcul et copiées dans le livret des évaluations. La feuille de calcul doit comporter une colonne avec les données permettant d\'identifier les utilisateurs, soit <em>username</em>, soit <em>ID number</em>, soit l\'adresse de courriel. Chaque colonne doit avoir un entête.';
