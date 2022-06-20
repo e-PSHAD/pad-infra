@@ -111,6 +111,9 @@ config:
     key: newsitems
     value: 0
     plugin: moodlecourse
+  - # use dropdown menu instead of tabs to navigate between grade reports
+    key: grade_navmethod
+    value: 0
 
   # BigBlueButton activity
   - # enable presentation preupload in parameters
