@@ -69,7 +69,7 @@
     - name: Assign category roles to users
       ansible.builtin.shell: >
         sudo -u {{ webserver.webuser }}
-        php theme/padplus/cli/assign_category_roles.php `pwd`/{{ import_data.users_categories_file }}
+        php local/padplusextensions/cli/assign_category_roles.php `pwd`/{{ import_data.users_categories_file }}
       args:
         chdir: "{{ moodle_path }}"
       register: result

@@ -93,7 +93,7 @@
         container: "{{ docker.webserver_name }}"
         command: >
           /bin/bash -c
-          "php theme/padplus/cli/assign_category_roles.php `pwd`/{{ import_data.users_categories_file }}"
+          "php local/padplusextensions/cli/assign_category_roles.php `pwd`/{{ import_data.users_categories_file }}"
         chdir: "{{ moodle_path }}"
       register: result
       tags: users_categories
