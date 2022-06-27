@@ -28,6 +28,7 @@ defined('MOODLE_INTERNAL') || die();
 $string['allcourses'] = 'Toutes les séquences';
 $string['core-course-content'] = 'Contenu de séquence';
 $string['core-courses'] = 'Séquences';
+$string['globalsearch'] = 'Résultats de recherche';
 $string['incourse'] = 'dans la séquence {$a}';
 $string['mycoursesonly'] = 'Mes séquences seulement';
 $string['search:course'] = 'Séquences';
